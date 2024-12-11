@@ -3,7 +3,7 @@ import { DialogLayerManager } from './index';
 
 HuskyCore.addLoadedFile('hp_DialogLayerManager$Lazy.js');
 /**
- * @depends nhn.husky.DialogLayerManager
+ * @depends DialogLayerManager
  * this.oApp.registerLazyMessage(["SHOW_DIALOG_LAYER","TOGGLE_DIALOG_LAYER"], ["hp_DialogLayerManager$Lazy.js", "N_DraggableLayer.js"]);
  */
 HuskyCore.mixin(DialogLayerManager, {

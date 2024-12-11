@@ -2,7 +2,7 @@ import { HuskyCore } from '../../husky_framework';
 
 HuskyCore.addLoadedFile('SE2M_TableTemplate.js');
 // "padding", "backgroundcolor", "border", "borderTop", "borderRight", "borderBottom", "borderLeft", "color", "textAlign", "fontWeight"
-nhn.husky.SE2M_TableTemplate = [
+export const SE2M_TableTemplate = [
   {},
   /*
 	// 0

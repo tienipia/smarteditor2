@@ -1,6 +1,14 @@
 import { SE2M_Toolbar } from './common/base/hp_SE2M_Toolbar';
 import { SE2B_CSSLoader, SE_OuterIFrameControl, SE_ToolbarToggler } from './extra';
 import {
+  SE2M_FindReplacePlugin,
+  SE2M_Quote,
+  SE2M_SCharacter,
+  SE2M_TableBlockStyler,
+  SE2M_TableCreator,
+  SE2M_TableEditor
+} from './fundamental/advanced';
+import {
   SE2M_Accessibility,
   SE2M_BGColor,
   SE2M_ColorPalette,
@@ -127,16 +135,16 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new SE2M_ExecCommand(oWYSIWYGIFrame));
   oEditor.registerPlugin(new SE2M_LineHeightWithLayerUI(elAppContainer)); // 줄간격
 
-  oEditor.registerPlugin(new nhn.husky.SE2M_Quote(elAppContainer)); // 인용구
+  oEditor.registerPlugin(new SE2M_Quote(elAppContainer)); // 인용구
   oEditor.registerPlugin(new SE2M_Hyperlink(elAppContainer)); // 링크
-  oEditor.registerPlugin(new nhn.husky.SE2M_SCharacter(elAppContainer)); // 특수문자
-  oEditor.registerPlugin(new nhn.husky.SE2M_FindReplacePlugin(elAppContainer)); // 찾기/바꾸기
-  oEditor.registerPlugin(new nhn.husky.SE2M_TableCreator(elAppContainer)); // 테이블 생성
-  oEditor.registerPlugin(new nhn.husky.SE2M_TableEditor(elAppContainer)); // 테이블 편집
-  oEditor.registerPlugin(new nhn.husky.SE2M_TableBlockStyler(elAppContainer)); // 테이블 스타일
-  if (nhn.husky.SE2M_AttachQuickPhoto) {
-    oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer)); // 사진
-  }
+  oEditor.registerPlugin(new SE2M_SCharacter(elAppContainer)); // 특수문자
+  oEditor.registerPlugin(new SE2M_FindReplacePlugin(elAppContainer)); // 찾기/바꾸기
+  oEditor.registerPlugin(new SE2M_TableCreator(elAppContainer)); // 테이블 생성
+  oEditor.registerPlugin(new SE2M_TableEditor(elAppContainer)); // 테이블 편집
+  oEditor.registerPlugin(new SE2M_TableBlockStyler(elAppContainer)); // 테이블 스타일
+  // if (SE2M_AttachQuickPhoto) {
+  //   oEditor.registerPlugin(new SE2M_AttachQuickPhoto(elAppContainer)); // 사진
+  // }
 
   oEditor.registerPlugin(new MessageManager(oMessageMap, htParams.I18N_LOCALE));
   oEditor.registerPlugin(new SE2M_QuickEditor_Common(elAppContainer)); // 퀵에디터 공통(표, 이미지)

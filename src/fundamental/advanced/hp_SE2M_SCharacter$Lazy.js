@@ -1,12 +1,13 @@
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_Utils } from '../../util';
+import { SE2M_SCharacter } from './hp_SE2M_SCharacter';
 
 HuskyCore.addLoadedFile('hp_SE2M_SCharacter$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_SCharacter
+ * @depends SE2M_SCharacter
  * this.oApp.registerLazyMessage(["TOGGLE_SCHARACTER_LAYER"], ["hp_SE2M_SCharacter$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_SCharacter, {
+HuskyCore.mixin(SE2M_SCharacter, {
   //@lazyload_js TOGGLE_SCHARACTER_LAYER[
   _assignHTMLObjects: function (oAppContainer) {
     oAppContainer = jindo.$(oAppContainer) || document;

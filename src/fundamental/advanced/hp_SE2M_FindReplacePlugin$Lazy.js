@@ -1,11 +1,12 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_FindReplacePlugin } from './hp_SE2M_FindReplacePlugin';
 
 HuskyCore.addLoadedFile('hp_SE2M_FindReplacePlugin$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_FindReplacePlugin
+ * @depends SE2M_FindReplacePlugin
  * this.oApp.registerLazyMessage(["TOGGLE_FIND_REPLACE_LAYER","SHOW_FIND_LAYER","SHOW_REPLACE_LAYER","SHOW_FIND_REPLACE_LAYER"], ["hp_SE2M_FindReplacePlugin$Lazy.js","N_FindReplace.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_FindReplacePlugin, {
+HuskyCore.mixin(SE2M_FindReplacePlugin, {
   //@lazyload_js TOGGLE_FIND_REPLACE_LAYER,SHOW_FIND_LAYER,SHOW_REPLACE_LAYER,SHOW_FIND_REPLACE_LAYER:N_FindReplace.js[
   _assignHTMLElements: function () {
     var oAppContainer = this.oApp.htOptions.elAppContainer;

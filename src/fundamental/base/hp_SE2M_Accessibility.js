@@ -116,15 +116,9 @@ export const SE2M_Accessibility = jindo.$Class({
     if (this._currentNextFocusElement) {
       window.focus(); // [SMARTEDITORSUS-1360] IE7에서는 element에 대한 focus를 주기 위해 선행되어야 한다.
       this._currentNextFocusElement.focus();
-    } else if (
-      parent &&
-      parent.nhn &&
-      parent.nhn.husky &&
-      parent.nhn.husky.EZCreator &&
-      parent.nhn.husky.EZCreator.elIFrame
-    ) {
+    } else if (parent && parent.nhn && parent.nhn.husky && parent.EZCreator && parent.EZCreator.elIFrame) {
       parent.focus();
-      if ((this._currentNextFocusElement = this._findNextFocusElement(parent.nhn.husky.EZCreator.elIFrame))) {
+      if ((this._currentNextFocusElement = this._findNextFocusElement(parent.EZCreator.elIFrame))) {
         this._currentNextFocusElement.focus();
       }
     }
@@ -322,15 +316,9 @@ export const SE2M_Accessibility = jindo.$Class({
     if (this._currentPreviousFocusElement) {
       window.focus(); // [SMARTEDITORSUS-1360] IE7에서는 element에 대한 focus를 주기 위해 선행되어야 한다.
       this._currentPreviousFocusElement.focus();
-    } else if (
-      parent &&
-      parent.nhn &&
-      parent.nhn.husky &&
-      parent.nhn.husky.EZCreator &&
-      parent.nhn.husky.EZCreator.elIFrame
-    ) {
+    } else if (parent && parent.nhn && parent.nhn.husky && parent.EZCreator && parent.EZCreator.elIFrame) {
       parent.focus();
-      if ((this._currentPreviousFocusElement = this._findPreviousFocusElement(parent.nhn.husky.EZCreator.elIFrame))) {
+      if ((this._currentPreviousFocusElement = this._findPreviousFocusElement(parent.EZCreator.elIFrame))) {
         this._currentPreviousFocusElement.focus();
       }
     }

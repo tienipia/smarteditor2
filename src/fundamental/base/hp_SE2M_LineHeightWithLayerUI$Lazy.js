@@ -3,7 +3,7 @@ import { SE2M_LineHeightWithLayerUI } from './hp_SE2M_LineHeightWithLayerUI';
 
 HuskyCore.addLoadedFile('hp_SE2M_LineHeightWithLayerUI$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_LineHeightWithLayerUI
+ * @depends SE2M_LineHeightWithLayerUI
  * this.oApp.registerLazyMessage(["SE2M_TOGGLE_LINEHEIGHT_LAYER"], ["hp_SE2M_LineHeightWithLayerUI$Lazy.js"]);
  */
 HuskyCore.mixin(SE2M_LineHeightWithLayerUI, {

@@ -1,13 +1,15 @@
 import { SE2M_Configuration } from '../../config';
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_Utils } from '../../util';
+import { SE2M_TableTemplate } from './SE2M_TableTemplate';
+import { SE2M_TableEditor } from './hp_SE2M_TableEditor';
 
 HuskyCore.addLoadedFile('hp_SE2M_TableEditor$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_TableEditor
+ * @depends  SE2M_TableEditor
  * this.oApp.registerLazyMessage(["EVENT_EDITING_AREA_MOUSEMOVE", "STYLE_TABLE"], ["hp_SE2M_TableEditor$Lazy.js","SE2M_TableTemplate.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
+HuskyCore.mixin(SE2M_TableEditor, {
   // [SMARTEDITORSUS-1672]
   _aCellName: ['TD', 'TH'],
   // --[SMARTEDITORSUS-1672]
@@ -2619,7 +2621,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
     // clear style first if already exists
     /*
 		if(elTable.getAttribute(this.ATTR_TBL_TEMPLATE)){
-			this._doApplyTableTemplate(elTable, nhn.husky.SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))], true);
+			this._doApplyTableTemplate(elTable, SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))], true);
 		}else{
 			this._clearAllTableStyles(elTable);
 		}
@@ -2633,7 +2635,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
     // http://bts.nhncorp.com/nhnbts/browse/COM-871
     this._clearAllTableStyles(elTable);
 
-    this._doApplyTableTemplate(elTable, nhn.husky.SE2M_TableTemplate[nTemplateIdx], false);
+    this._doApplyTableTemplate(elTable, SE2M_TableTemplate[nTemplateIdx], false);
     elTable.setAttribute(this.ATTR_TBL_TEMPLATE, nTemplateIdx);
   },
 
@@ -2668,7 +2670,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
     if (elTable.getAttribute(this.ATTR_TBL_TEMPLATE)) {
       this._doApplyTableTemplate(
         elTable,
-        nhn.husky.SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))],
+        SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))],
         true
       );
     }
@@ -2678,7 +2680,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
     if (elTable.getAttribute(this.ATTR_TBL_TEMPLATE)) {
       this._doApplyTableTemplate(
         elTable,
-        nhn.husky.SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))],
+        SE2M_TableTemplate[this.parseIntOr0(elTable.getAttribute(this.ATTR_TBL_TEMPLATE))],
         false
       );
     }

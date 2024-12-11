@@ -1,12 +1,13 @@
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_Utils } from '../../util';
+import { SE2M_Quote } from './hp_SE2M_Quote';
 
 HuskyCore.addLoadedFile('hp_SE2M_Quote$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_Quote
+ * @depends SE2M_Quote
  * this.oApp.registerLazyMessage(["TOGGLE_BLOCKQUOTE_LAYER"], ["hp_SE2M_Quote$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_Quote, {
+HuskyCore.mixin(SE2M_Quote, {
   //@lazyload_js TOGGLE_BLOCKQUOTE_LAYER[
   $ON_TOGGLE_BLOCKQUOTE_LAYER: function () {
     this.oApp.exec('TOGGLE_TOOLBAR_ACTIVE_LAYER', [

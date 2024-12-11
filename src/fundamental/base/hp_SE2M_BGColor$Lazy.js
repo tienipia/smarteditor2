@@ -3,7 +3,7 @@ import { SE2M_BGColor } from './hp_SE2M_BGColor';
 
 HuskyCore.addLoadedFile('hp_SE2M_BGColor$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_BGColor
+ * @depends SE2M_BGColor
  * this.oApp.registerLazyMessage(["APPLY_LAST_USED_BGCOLOR", "TOGGLE_BGCOLOR_LAYER"], ["hp_SE2M_BGColor$Lazy.js"]);
  */
 HuskyCore.mixin(SE2M_BGColor, {

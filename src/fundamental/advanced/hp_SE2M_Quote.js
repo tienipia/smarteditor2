@@ -1,6 +1,6 @@
 import { SE2M_Configuration } from '../../config';
 
-nhn.husky.SE2M_Quote = jindo.$Class({
+export const SE2M_Quote = jindo.$Class({
   name: 'SE2M_Quote',
 
   htQuoteStyles_view: null,

@@ -20,11 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * @name hp_SE2M_SCharacter.js
  * @required HuskyRangeManager
  */
-nhn.husky.SE2M_SCharacter = jindo.$Class({
-	name : "SE2M_SCharacter",
+export const SE2M_SCharacter = jindo.$Class({
+  name: 'SE2M_SCharacter',
 
-	$ON_MSG_APP_READY : function(){
-		this.oApp.exec("REGISTER_UI_EVENT", ["sCharacter", "click", "TOGGLE_SCHARACTER_LAYER"]);
-		this.oApp.registerLazyMessage(["TOGGLE_SCHARACTER_LAYER"], ["hp_SE2M_SCharacter$Lazy.js"]);
-	}
+  $ON_MSG_APP_READY: function () {
+    this.oApp.exec('REGISTER_UI_EVENT', ['sCharacter', 'click', 'TOGGLE_SCHARACTER_LAYER']);
+    this.oApp.registerLazyMessage(['TOGGLE_SCHARACTER_LAYER'], ['hp_SE2M_SCharacter$Lazy.js']);
+  }
 });

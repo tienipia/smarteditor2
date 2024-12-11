@@ -1,12 +1,13 @@
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_Utils } from '../../util';
+import { SE2M_TableCreator } from './hp_SE2M_TableCreator';
 
 HuskyCore.addLoadedFile('hp_SE2M_TableCreator$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_TableCreator
+ * @depends SE2M_TableCreator
  * this.oApp.registerLazyMessage(["TOGGLE_TABLE_LAYER"], ["hp_SE2M_TableCreator$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_TableCreator, {
+HuskyCore.mixin(SE2M_TableCreator, {
   //@lazyload_js TOGGLE_TABLE_LAYER[
   _assignHTMLObjects: function (oAppContainer) {
     this.oApp.exec('LOAD_HTML', ['create_table']);

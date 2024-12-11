@@ -1,27 +1,3 @@
-/*
-Copyright (C) NAVER corp.  
-
-This library is free software; you can redistribute it and/or  
-modify it under the terms of the GNU Lesser General Public  
-License as published by the Free Software Foundation; either  
-version 2.1 of the License, or (at your option) any later version.  
-
-This library is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
-Lesser General Public License for more details.  
-
-You should have received a copy of the GNU Lesser General Public  
-License along with this library; if not, write to the Free Software  
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  
-*/
-if (typeof window.nhn == 'undefined') {
-  window.nhn = {};
-}
-if (!nhn.husky) {
-  nhn.husky = {};
-}
-
 (function () {
   // 구버전 jindo.$Agent polyfill
   var ua = navigator.userAgent,
@@ -810,7 +786,7 @@ getFilteredHashTable({
    * @param {Object} oTarget 대상 객체
    * @param {String} sProp property 명
    *
-   * @example nhn.husky.SE2M_Utils.deleteProperty(elTable, 'propA'); // elTable.propA를 delete
+   * @example SE2M_Utils.deleteProperty(elTable, 'propA'); // elTable.propA를 delete
    *
    * @see http://stackoverflow.com/questions/1073414/deleting-a-window-property-in-ie
    * */
@@ -874,7 +850,7 @@ getFilteredHashTable({
 	 * @example
 	 *  var oSource = [1, 3, 4, { a:1, b:2, c: { a:1 }}];
 		var oTarget = oSource; // call by reference	
-		oTarget = nhn.husky.SE2M_Utils.clone(oSource);
+		oTarget = SE2M_Utils.clone(oSource);
 		
 		oTarget[1] = 2;
 		oTarget[3].a = 100;
@@ -1127,7 +1103,7 @@ getFilteredHashTable({
 };
 
 /**
- * nhn.husky.AutoResizer
+ * AutoResizer
  * 	HTML모드와 TEXT 모드의 편집 영역인 TEXTAREA에 대한 자동확장 처리
  */
 export const AutoResizer = jindo.$Class({

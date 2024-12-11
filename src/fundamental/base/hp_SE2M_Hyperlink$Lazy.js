@@ -4,7 +4,7 @@ import { SE2M_Hyperlink } from './hp_SE2M_Hyperlink';
 
 HuskyCore.addLoadedFile('hp_SE2M_Hyperlink$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_Hyperlink
+ * @depends SE2M_Hyperlink
  * this.oApp.registerLazyMessage(["TOGGLE_HYPERLINK_LAYER", "APPLY_HYPERLINK"], ["hp_SE2M_Hyperlink$Lazy.js"]);
  */
 HuskyCore.mixin(SE2M_Hyperlink, {

@@ -1,6 +1,16 @@
 import { createSEditor2 } from '../basic';
-import './base';
+import { SE_EditingAreaManager } from '../fundamental/editing';
 import './lazy';
+
+const __VERSION__ = '2.0.0';
+const __HASH__ = 'b1e2f4c';
+
+window.nSE2Version = __VERSION__ + '.' + __HASH__;
+SE_EditingAreaManager.version = {
+  revision: __HASH__,
+  type: 'open',
+  number: __VERSION__
+};
 
 if (window.frameElement) {
   jindo.$('se2_sample').style.display = 'none';

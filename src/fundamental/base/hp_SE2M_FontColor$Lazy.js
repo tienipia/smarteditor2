@@ -3,7 +3,7 @@ import { SE2M_FontColor } from './hp_SE2M_FontColor';
 
 HuskyCore.addLoadedFile('hp_SE2M_FontColor$Lazy.js');
 /**
- * @depends nhn.husky.SE2M_FontColor
+ * @depends SE2M_FontColor
  * this.oApp.registerLazyMessage(["APPLY_LAST_USED_FONTCOLOR", "TOGGLE_FONTCOLOR_LAYER"], ["hp_SE2M_FontColor$Lazy.js"]);
  */
 HuskyCore.mixin(SE2M_FontColor, {

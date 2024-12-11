@@ -5,7 +5,7 @@ import { DOMFix } from '../../husky_framework';
  * @fileOverview This file contains Husky plugin with test handlers
  * @name hp_SE2M_StyleRemover.js
  */
-nhn.husky.SE2M_StyleRemover = jindo.$Class({
+export const SE2M_StyleRemover = jindo.$Class({
   name: 'SE2M_StyleRemover',
 
   $ON_MSG_APP_READY: function () {

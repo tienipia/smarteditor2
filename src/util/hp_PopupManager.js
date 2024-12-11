@@ -16,7 +16,7 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  
 */
 /**
- * @name nhn.husky.PopUpManager
+ * @name PopUpManager
  * @namespace
  * @description 팝업 매니저 클래스.
  * <dt><strong>Spec Code</strong></dt>
@@ -38,13 +38,13 @@ PopUpManager._pluginKeyCnt = 0;
  * @description 팝업 매니저 인스턴스 호출 메소드, nhn.husky js framework 기반 코드
  * @public
  * @param {Object} oApp 허스키 코어 객체를 넘겨준다.(this.oApp)
- * @return {Object} nhn.husky.PopUpManager Instance
+ * @return {Object} PopUpManager Instance
  * @example 팝업관련 플러그인 제작 예제
- * nhn.husky.NewPlugin = function(){
+ * NewPlugin = function(){
  * 	this.$ON_APP_READY = function(){
  * 		// 팝업 매니저 getInstance 메소드를 호출한다.
  * 		// 허스키 코어의 참조값을 넘겨준다(this.oApp)
- * 		this.oPopupMgr = nhn.husky.PopUpMaganer.getInstance(this.oApp);
+ * 		this.oPopupMgr = PopUpMaganer.getInstance(this.oApp);
  * 	};
  *
  * 	// 팝업을 요청하는 메시지 메소드는 아래와 같음
@@ -68,7 +68,7 @@ PopUpManager._pluginKeyCnt = 0;
  * }
  * @example 팝업 페이지와 opener 호출 인터페이스 예제
  * onclick시
- * "nhn.husky.PopUpManager.setCallback(window, "NEWPLUGIN_WINDOW_CALLBACK", oData);"
+ * "PopUpManager.setCallback(window, "NEWPLUGIN_WINDOW_CALLBACK", oData);"
  * 형태로 호출함.
  *
  *
@@ -161,7 +161,7 @@ PopUpManager.getInstance = function (oApp) {
   }
 
   this._instance.addPlugin('plugin_' + this._pluginKeyCnt++, oApp);
-  return nhn.husky.PopUpManager._instance;
+  return PopUpManager._instance;
 };
 
 /**
