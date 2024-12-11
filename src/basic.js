@@ -1,3 +1,4 @@
+import { SE2B_CSSLoader } from './extra';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { Hotkey } from './shortcut/hp_Hotkey';
@@ -106,7 +107,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new nhn.husky.MessageManager(oMessageMap, htParams.I18N_LOCALE));
   oEditor.registerPlugin(new nhn.husky.SE2M_QuickEditor_Common(elAppContainer)); // 퀵에디터 공통(표, 이미지)
 
-  oEditor.registerPlugin(new nhn.husky.SE2B_CSSLoader()); // CSS lazy load
+  oEditor.registerPlugin(new SE2B_CSSLoader()); // CSS lazy load
   if (window.frameElement) {
     oEditor.registerPlugin(new nhn.husky.SE_OuterIFrameControl(elAppContainer, 100));
   }

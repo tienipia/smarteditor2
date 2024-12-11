@@ -1,6 +1,6 @@
 import { SE2M_Configuration } from '../config.js';
 
-nhn.husky.SE2B_CSSLoader = jindo.$Class({
+export const SE2B_CSSLoader = jindo.$Class({
   name: 'SE2B_CSSLoader',
   bCssLoaded: false,
 

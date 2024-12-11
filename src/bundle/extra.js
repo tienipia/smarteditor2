@@ -1,4 +1,3 @@
-import "../extra/hp_SE2B_CSSLoader.js";
 import "../extra/husky_SE2B_Lang_ko_KR.js";
 import "../extra/husky_SE2B_Lang_en_US.js";
 import "../extra/husky_SE2B_Lang_ja_JP.js";
