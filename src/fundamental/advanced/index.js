@@ -5,3 +5,4 @@ export * from './hp_SE2M_StyleRemover';
 export * from './hp_SE2M_TableBlockStyler';
 export * from './hp_SE2M_TableCreator';
 export * from './hp_SE2M_TableEditor';
+export * from './N_FindReplace';

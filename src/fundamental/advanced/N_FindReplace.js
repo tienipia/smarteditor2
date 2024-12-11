@@ -1,4 +1,5 @@
 import { HuskyCore, HuskyRange, START_TO_END } from '../../husky_framework';
+import { DOMFix } from '../../husky_framework';
 
 HuskyCore.addLoadedFile('N_FindReplace.js');
 
@@ -6,7 +7,7 @@ HuskyCore.addLoadedFile('N_FindReplace.js');
  * @fileOverview This file contains a function that takes care of various operations related to find and replace
  * @name N_FindReplace.js
  */
-nhn.FindReplace = jindo.$Class({
+export const FindReplace = jindo.$Class({
   sKeyword: '',
   window: null,
   document: null,
@@ -269,7 +270,7 @@ nhn.FindReplace = jindo.$Class({
       return { elNextNode: elNode, bDisconnected: bDisconnected };
     }
 
-    return this._getNextNode(nhn.DOMFix.parentNode(elNode), bDisconnected);
+    return this._getNextNode(DOMFix.parentNode(elNode), bDisconnected);
   },
 
   _getNextTextNode: function (elNode, bDisconnected) {

@@ -1,4 +1,5 @@
 import { SE2M_Configuration } from '../../config';
+import { ColorPicker } from './colorpicker';
 
 //{
 /**
@@ -201,7 +202,7 @@ export const SE2M_ColorPalette = jindo
     $ON_SHOW_COLOR_PICKER: function () {
       this.elColorPaletteLayerColorPicker.style.display = '';
 
-      this.cpp = new nhn.ColorPicker(this.elCP_ColPanel, { huePanel: this.elCP_HuePanel });
+      this.cpp = new ColorPicker(this.elCP_ColPanel, { huePanel: this.elCP_HuePanel });
       var fn = jindo
         .$Fn(function (oEvent) {
           this.elPreview.style.backgroundColor = oEvent.hexColor;

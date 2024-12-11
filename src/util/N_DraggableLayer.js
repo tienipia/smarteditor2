@@ -5,7 +5,7 @@ HuskyCore.addLoadedFile('N_DraggableLayer.js');
  * @fileOverview This file contains a function that takes care of the draggable layers
  * @name N_DraggableLayer.js
  */
-nhn.DraggableLayer = jindo.$Class({
+export const DraggableLayer = jindo.$Class({
   $init: function (elLayer, oOptions) {
     this.elLayer = elLayer;
 

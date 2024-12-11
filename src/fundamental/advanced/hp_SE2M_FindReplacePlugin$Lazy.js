@@ -1,5 +1,6 @@
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_FindReplacePlugin } from './hp_SE2M_FindReplacePlugin';
+import { FindReplace } from './index';
 
 HuskyCore.addLoadedFile('hp_SE2M_FindReplacePlugin$Lazy.js');
 /**
@@ -46,7 +47,7 @@ HuskyCore.mixin(SE2M_FindReplacePlugin, {
   $LOCAL_BEFORE_FIRST: function (/* sMsg */) {
     this._assignHTMLElements();
 
-    this.oFindReplace = new nhn.FindReplace(this.oEditingWindow);
+    this.oFindReplace = new FindReplace(this.oEditingWindow);
 
     for (var i = 0; i < this.aCloseButtons.length; i++) {
       // var func = jindo.$Fn(this.oApp.exec, this.oApp).bind("HIDE_DIALOG_LAYER", [this.elDropdownLayer]);

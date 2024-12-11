@@ -1,5 +1,5 @@
 import { HuskyCore } from '../husky_framework';
-import { DialogLayerManager } from './index';
+import { DialogLayerManager, DraggableLayer } from './index';
 
 HuskyCore.addLoadedFile('hp_DialogLayerManager$Lazy.js');
 /**
@@ -28,7 +28,7 @@ HuskyCore.mixin(DialogLayerManager, {
     var nIdx = jindo.$A(this.aMadeDraggable).indexOf(elLayer);
 
     if (nIdx == -1) {
-      oDraggableLayer = new nhn.DraggableLayer(elLayer, htOptions);
+      oDraggableLayer = new DraggableLayer(elLayer, htOptions);
       this.aMadeDraggable[this.aMadeDraggable.length] = elLayer;
       this.aDraggableLayer[this.aDraggableLayer.length] = oDraggableLayer;
     } else {

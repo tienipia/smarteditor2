@@ -1,9 +1,5 @@
 import { SE2M_Configuration } from '../config';
 
-if (typeof window.nhn == 'undefined') {
-  window.nhn = {};
-}
-
 export const APP_STATUS = {
   NOT_READY: 0,
   WAITING_FOR_PLUGINS_READY: 1,

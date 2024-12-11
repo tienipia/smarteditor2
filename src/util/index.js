@@ -6,3 +6,4 @@ export * from './hp_MessageManager';
 export * from './hp_LazyLoader';
 export * from './hp_PopupManager';
 export * from './hp_SE2M_Utils';
+export * from './N_DraggableLayer';
