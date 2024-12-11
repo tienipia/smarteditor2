@@ -1,11 +1,12 @@
 import { HuskyCore } from '../husky_framework';
+import { DialogLayerManager } from './index';
 
 HuskyCore.addLoadedFile('hp_DialogLayerManager$Lazy.js');
 /**
  * @depends nhn.husky.DialogLayerManager
  * this.oApp.registerLazyMessage(["SHOW_DIALOG_LAYER","TOGGLE_DIALOG_LAYER"], ["hp_DialogLayerManager$Lazy.js", "N_DraggableLayer.js"]);
  */
-HuskyCore.mixin(nhn.husky.DialogLayerManager, {
+HuskyCore.mixin(DialogLayerManager, {
   //@lazyload_js SHOW_DIALOG_LAYER,TOGGLE_DIALOG_LAYER:N_DraggableLayer.js[
   $ON_SHOW_DIALOG_LAYER: function (elLayer, htOptions) {
     elLayer = jindo.$(elLayer);

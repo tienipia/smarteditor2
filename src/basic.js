@@ -3,6 +3,14 @@ import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { Hotkey } from './shortcut/hp_Hotkey';
 import { SE_UndoRedo } from './undo_redo/hp_SE_UndoRedo';
+import {
+  ActiveLayerManager,
+  DialogLayerManager,
+  MessageManager,
+  SE2M_UtilPlugin,
+  StringConverterManager,
+  Utils
+} from './util';
 
 export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   if (!window.$Jindo) {
@@ -28,7 +36,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
 
   var oEditor = new HuskyCore(htParams);
   oEditor.registerPlugin(new CorePlugin(htParams ? htParams.fOnAppLoad : null));
-  oEditor.registerPlugin(new nhn.husky.StringConverterManager());
+  oEditor.registerPlugin(new StringConverterManager());
   if (htParams.bSkipXssFilter !== true) {
     // 보안 필터링 플러그인 (TODO:소스분리 및 블랙리스트 옵션 추가)
     oEditor.registerPlugin({
@@ -70,15 +78,15 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new nhn.husky.SE_PasteHandler()); // WYSIWYG Paste Handler
 
   oEditor.registerPlugin(new HuskyRangeManager(oWYSIWYGIFrame));
-  oEditor.registerPlugin(new nhn.husky.Utils());
-  oEditor.registerPlugin(new nhn.husky.SE2M_UtilPlugin());
+  oEditor.registerPlugin(new Utils());
+  oEditor.registerPlugin(new SE2M_UtilPlugin());
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyler());
   oEditor.registerPlugin(new nhn.husky.SE2M_Toolbar(elAppContainer));
 
   oEditor.registerPlugin(new Hotkey()); // 단축키
   oEditor.registerPlugin(new nhn.husky.SE_EditingAreaVerticalResizer(elAppContainer, htConversionMode)); // 편집영역 리사이즈
-  oEditor.registerPlugin(new nhn.husky.DialogLayerManager());
-  oEditor.registerPlugin(new nhn.husky.ActiveLayerManager());
+  oEditor.registerPlugin(new DialogLayerManager());
+  oEditor.registerPlugin(new ActiveLayerManager());
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyleGetter()); // 커서 위치 스타일 정보 가져오기
 
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey('P')); // 엔터 시 처리, 현재는 P로 처리
@@ -104,7 +112,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
     oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer)); // 사진
   }
 
-  oEditor.registerPlugin(new nhn.husky.MessageManager(oMessageMap, htParams.I18N_LOCALE));
+  oEditor.registerPlugin(new MessageManager(oMessageMap, htParams.I18N_LOCALE));
   oEditor.registerPlugin(new nhn.husky.SE2M_QuickEditor_Common(elAppContainer)); // 퀵에디터 공통(표, 이미지)
 
   oEditor.registerPlugin(new SE2B_CSSLoader()); // CSS lazy load

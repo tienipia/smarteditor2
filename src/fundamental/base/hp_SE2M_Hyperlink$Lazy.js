@@ -1,4 +1,5 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 HuskyCore.addLoadedFile('hp_SE2M_Hyperlink$Lazy.js');
 /**
@@ -121,14 +122,7 @@ HuskyCore.mixin(nhn.husky.SE2M_Hyperlink, {
       var sBM;
       if (this.oSelection.collapsed) {
         var str =
-          "<a href='" +
-          sURL +
-          "' target=" +
-          sTarget +
-          '>' +
-          nhn.husky.SE2M_Utils.replaceSpecialChar(sURL) +
-          '</a>' +
-          sBlank;
+          "<a href='" + sURL + "' target=" + sTarget + '>' + SE2M_Utils.replaceSpecialChar(sURL) + '</a>' + sBlank;
         this.oSelection.pasteHTML(str);
         sBM = this.oSelection.placeStringBookmark();
       } else {

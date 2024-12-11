@@ -1,4 +1,5 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 HuskyCore.addLoadedFile('hp_SE2M_Quote$Lazy.js');
 /**
@@ -20,7 +21,7 @@ HuskyCore.mixin(nhn.husky.SE2M_Quote, {
   },
 
   $ON_EVENT_SE2_BLOCKQUOTE_LAYER_CLICK: function (weEvent) {
-    var elButton = nhn.husky.SE2M_Utils.findAncestorByTagName('BUTTON', weEvent.element);
+    var elButton = SE2M_Utils.findAncestorByTagName('BUTTON', weEvent.element);
 
     if (!elButton || elButton.tagName != 'BUTTON') {
       return;
@@ -157,9 +158,9 @@ HuskyCore.mixin(nhn.husky.SE2M_Quote, {
       oSelection.startContainer.tagName === 'P'
     ) {
       if (
-        nhn.husky.SE2M_Utils.isBlankNode(oSelection.startContainer) ||
-        nhn.husky.SE2M_Utils.isFirstChildOfNode('IMG', oSelection.startContainer.tagName, oSelection.startContainer) ||
-        nhn.husky.SE2M_Utils.isFirstChildOfNode('IFRAME', oSelection.startContainer.tagName, oSelection.startContainer)
+        SE2M_Utils.isBlankNode(oSelection.startContainer) ||
+        SE2M_Utils.isFirstChildOfNode('IMG', oSelection.startContainer.tagName, oSelection.startContainer) ||
+        SE2M_Utils.isFirstChildOfNode('IFRAME', oSelection.startContainer.tagName, oSelection.startContainer)
       ) {
         oLineInfo = oSelection.getLineInfo(true);
       } else {
@@ -302,7 +303,7 @@ HuskyCore.mixin(nhn.husky.SE2M_Quote, {
     //		oSelection.removeStringBookmark(sBookmarkID);
     // Insert an empty line inside the blockquote if it's empty.
     // This is done to position the cursor correctly when the contents of the blockquote is empty in Chrome.
-    if (nhn.husky.SE2M_Utils.isBlankNode(oFormattingNode)) {
+    if (SE2M_Utils.isBlankNode(oFormattingNode)) {
       // [SMARTEDITORSUS-1751] 현재 undo/redo 기능을 사용하지 않고 ie7은 주요브라우저에서 제외되었기 때문에 다른 이슈들 처리시 복잡도를 줄이기 위해 코멘트처리함
       // [SMARTEDITORSUS-645] 편집영역 포커스 없이 인용구 추가했을 때 IE7에서 박스가 늘어나는 문제
       //oFormattingNode.innerHTML = "&nbsp;";

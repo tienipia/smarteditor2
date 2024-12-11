@@ -50,18 +50,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 /**
  * @pluginDesc 드래그가 가능한 레이어를 컨트롤 하는 플러그인
  */
-nhn.husky.DialogLayerManager = jindo.$Class({
-	name : "DialogLayerManager",
-	aMadeDraggable : null,
-	aOpenedLayers : null,
+export const DialogLayerManager = jindo.$Class({
+  name: 'DialogLayerManager',
+  aMadeDraggable: null,
+  aOpenedLayers: null,
 
-	$init : function(){
-		this.aMadeDraggable = [];
-		this.aDraggableLayer = [];
-		this.aOpenedLayers = [];
-	},
+  $init: function () {
+    this.aMadeDraggable = [];
+    this.aDraggableLayer = [];
+    this.aOpenedLayers = [];
+  },
 
-	$ON_MSG_APP_READY : function() {
-		this.oApp.registerLazyMessage(["SHOW_DIALOG_LAYER","TOGGLE_DIALOG_LAYER"], ["hp_DialogLayerManager$Lazy.js", "N_DraggableLayer.js"]);
-	}
+  $ON_MSG_APP_READY: function () {
+    this.oApp.registerLazyMessage(
+      ['SHOW_DIALOG_LAYER', 'TOGGLE_DIALOG_LAYER'],
+      ['hp_DialogLayerManager$Lazy.js', 'N_DraggableLayer.js']
+    );
+  }
 });

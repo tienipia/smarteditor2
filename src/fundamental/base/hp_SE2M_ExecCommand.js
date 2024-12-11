@@ -1,4 +1,5 @@
 import { CurrentSelection } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 //{
 /**
@@ -109,7 +110,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
     // 테이블관련 태그 사이에 태그가 있으면 문법에 어긋나기 때문에 getContents 시 이 더미 P 태그들이 밖으로 빠져나가게 된다.
     // 때문에 execCommand 실행되기 전에 셀렉션에 테이블관련 태그 사이의 텍스트노드를 찾아내 지워준다.
     for (var i = 0, aNodes = oSelection.getNodes(), oNode; (oNode = aNodes[i]); i++) {
-      nhn.husky.SE2M_Utils.removeInvalidNodeInTable(oNode);
+      SE2M_Utils.removeInvalidNodeInTable(oNode);
     }
 
     if (/^insertorderedlist|insertunorderedlist$/i.test(sCommand)) {
@@ -193,14 +194,11 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
     ) {
       var oSelection = this.oApp.getSelection();
       var elCommonAncestorContainer = oSelection.commonAncestorContainer;
-      var htAncestor_blockquote = nhn.husky.SE2M_Utils.findAncestorByTagNameWithCount(
-        'BLOCKQUOTE',
-        elCommonAncestorContainer
-      );
+      var htAncestor_blockquote = SE2M_Utils.findAncestorByTagNameWithCount('BLOCKQUOTE', elCommonAncestorContainer);
       elBlockquote = htAncestor_blockquote.elNode;
 
       if (elBlockquote) {
-        var htAncestor_cell = nhn.husky.SE2M_Utils.findClosestAncestorAmongTagNamesWithCount(
+        var htAncestor_cell = SE2M_Utils.findClosestAncestorAmongTagNamesWithCount(
           ['td', 'th'],
           elCommonAncestorContainer
         );

@@ -1,4 +1,5 @@
 import { DOMFix } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 //{
 /**
@@ -97,8 +98,8 @@ nhn.husky.SE2M_LineStyler = jindo.$Class({
             // [SMARTEDITORSUS-1822] 테이블 셀이 일부가 선택되었다면
             // 현재 Selection의 fisrtNode 와 lastNode 가 셀 내부에 있는지 확인하고
             // 셀 내부에 있으면 노드를 선택된 테이블 셀 노드로 교체한다.
-            var elFirstTD = nhn.husky.SE2M_Utils.findAncestorByTagName('TD', firstNode);
-            var elLastTD = nhn.husky.SE2M_Utils.findAncestorByTagName('TD', lastNode);
+            var elFirstTD = SE2M_Utils.findAncestorByTagName('TD', firstNode);
+            var elLastTD = SE2M_Utils.findAncestorByTagName('TD', lastNode);
             firstNode = elFirstTD || !firstNode ? aNodes[0].firstChild : firstNode;
             lastNode = elLastTD || !lastNode ? aNodes[aNodes.length - 1].lastChild : lastNode;
           }

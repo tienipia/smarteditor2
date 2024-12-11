@@ -27,12 +27,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * @version 0.1
  * @since 2009.07.06
  */
-nhn.husky.PopUpManager = {};
+export const PopUpManager = {};
 
 /** * @ignore */
-nhn.husky.PopUpManager._instance = null;
+PopUpManager._instance = null;
 /** * @ignore */
-nhn.husky.PopUpManager._pluginKeyCnt = 0;
+PopUpManager._pluginKeyCnt = 0;
 
 /**
  * @description 팝업 매니저 인스턴스 호출 메소드, nhn.husky js framework 기반 코드
@@ -46,7 +46,7 @@ nhn.husky.PopUpManager._pluginKeyCnt = 0;
  * 		// 허스키 코어의 참조값을 넘겨준다(this.oApp)
  * 		this.oPopupMgr = nhn.husky.PopUpMaganer.getInstance(this.oApp);
  * 	};
- * 
+ *
  * 	// 팝업을 요청하는 메시지 메소드는 아래와 같음
  * 	this.$ON_NEWPLUGIN_OPEN_WINDOW = function(){
  * 		var oWinOp = {
@@ -59,7 +59,7 @@ nhn.husky.PopUpManager._pluginKeyCnt = 0;
  * 		}
  * 		this.oPopUpMgr.openWindow(oWinOp);
  * 	};
- * 
+ *
  * 	// 팝업페이지 응답데이타 반환 메시지 메소드를 정의함.
  * 	// 각 플러그인 팝업페이지에서 해당 메시지와 데이타를 넘기게 됨.
  * 	this.@ON_NEWPLUGIN_WINDOW_CALLBACK = function(){
@@ -70,112 +70,125 @@ nhn.husky.PopUpManager._pluginKeyCnt = 0;
  * onclick시
  * "nhn.husky.PopUpManager.setCallback(window, "NEWPLUGIN_WINDOW_CALLBACK", oData);"
  * 형태로 호출함.
- * 
- * 
+ *
+ *
  */
-nhn.husky.PopUpManager.getInstance = function(oApp) {
-	if (this._instance==null) {
-		
-		this._instance = new (function(){
-			
-			this._whtPluginWin = new jindo.$H();
-			this._whtPlugin = new jindo.$H();
-			this.addPlugin = function(sKey, vValue){
-				this._whtPlugin.add(sKey, vValue);
-			};
-			
-			this.getPlugin = function() {
-				return this._whtPlugin;
-			};
-			this.getPluginWin = function() {
-				return this._whtPluginWin;
-			};
-			
-			this.openWindow = function(oWinOpt) {
-				var op= {
-					oApp : null, 
-					sUrl : "", 
-					sName : "popup", 
-					sLeft : null,
-					sTop : null,
-					nWidth : 400,
-					nHeight : 400,
-					sProperties : null,
-					bScroll : true
-				};
-				for(var i in oWinOpt) op[i] = oWinOpt[i];
+PopUpManager.getInstance = function (oApp) {
+  if (this._instance == null) {
+    this._instance = new (function () {
+      this._whtPluginWin = new jindo.$H();
+      this._whtPlugin = new jindo.$H();
+      this.addPlugin = function (sKey, vValue) {
+        this._whtPlugin.add(sKey, vValue);
+      };
 
-				if(op.oApp == null) {
-					alert("팝업 요청시 옵션으로 oApp(허스키 reference) 값을 설정하셔야 합니다.");
-				}
-				
-				var left = op.sLeft || (screen.availWidth-op.nWidth)/2;
-				var top  = op.sTop ||(screen.availHeight-op.nHeight)/2;
+      this.getPlugin = function () {
+        return this._whtPlugin;
+      };
+      this.getPluginWin = function () {
+        return this._whtPluginWin;
+      };
 
-				var sProperties = op.sProperties != null ? op.sProperties : 
-					"top="+ top +",left="+ left +",width="+op.nWidth+",height="+op.nHeight+",scrollbars="+(op.bScroll?"yes":"no")+",status=yes";
-				var win = window.open(op.sUrl, op.sName,sProperties);
-				if (win) {
-					setTimeout( function(){ 
-						try{win.focus();}catch(e){/**/}
-					}, 100);
-				}
-				
-				this.removePluginWin(win);
-				this._whtPluginWin.add(this.getCorrectKey(this._whtPlugin, op.oApp), win);
+      this.openWindow = function (oWinOpt) {
+        var op = {
+          oApp: null,
+          sUrl: '',
+          sName: 'popup',
+          sLeft: null,
+          sTop: null,
+          nWidth: 400,
+          nHeight: 400,
+          sProperties: null,
+          bScroll: true
+        };
+        for (var i in oWinOpt) op[i] = oWinOpt[i];
 
-				return win;
-			};
-			this.getCorrectKey = function(whtData, oCompare) {
-				var key = null;
-				whtData.forEach(function(v,k){
-					if (v == oCompare) { 
-						key = k; 
-						return; 
-					}
-				});
-				return key;
-			};
-			this.removePluginWin = function(vValue) {
-				var list = this._whtPluginWin.search(vValue);
-				if (list) {
-					this._whtPluginWin.remove(list);
-					this.removePluginWin(vValue);
-				}
-			}
-		})();
-	}
-	
-	this._instance.addPlugin("plugin_" + (this._pluginKeyCnt++), oApp);
-	return nhn.husky.PopUpManager._instance;
+        if (op.oApp == null) {
+          alert('팝업 요청시 옵션으로 oApp(허스키 reference) 값을 설정하셔야 합니다.');
+        }
+
+        var left = op.sLeft || (screen.availWidth - op.nWidth) / 2;
+        var top = op.sTop || (screen.availHeight - op.nHeight) / 2;
+
+        var sProperties =
+          op.sProperties != null
+            ? op.sProperties
+            : 'top=' +
+              top +
+              ',left=' +
+              left +
+              ',width=' +
+              op.nWidth +
+              ',height=' +
+              op.nHeight +
+              ',scrollbars=' +
+              (op.bScroll ? 'yes' : 'no') +
+              ',status=yes';
+        var win = window.open(op.sUrl, op.sName, sProperties);
+        if (win) {
+          setTimeout(function () {
+            try {
+              win.focus();
+            } catch (e) {
+              /**/
+            }
+          }, 100);
+        }
+
+        this.removePluginWin(win);
+        this._whtPluginWin.add(this.getCorrectKey(this._whtPlugin, op.oApp), win);
+
+        return win;
+      };
+      this.getCorrectKey = function (whtData, oCompare) {
+        var key = null;
+        whtData.forEach(function (v, k) {
+          if (v == oCompare) {
+            key = k;
+            return;
+          }
+        });
+        return key;
+      };
+      this.removePluginWin = function (vValue) {
+        var list = this._whtPluginWin.search(vValue);
+        if (list) {
+          this._whtPluginWin.remove(list);
+          this.removePluginWin(vValue);
+        }
+      };
+    })();
+  }
+
+  this._instance.addPlugin('plugin_' + this._pluginKeyCnt++, oApp);
+  return nhn.husky.PopUpManager._instance;
 };
 
 /**
-* @description opener 연동 interface
+ * @description opener 연동 interface
  * @public
  * @param {Object} oOpenWin 팝업 페이지의 window 객체
  * @param {Object} sMsg	플러그인 메시지명
  * @param {Object} oData	응답 데이타
  */
-nhn.husky.PopUpManager.setCallback = function(oOpenWin, sMsg, oData) {
-	if (this._instance.getPluginWin().hasValue(oOpenWin)) {
-		var key = this._instance.getCorrectKey(this._instance.getPluginWin(), oOpenWin);
-		if (key) {
-			this._instance.getPlugin().$(key).exec(sMsg, oData);
-		}
-	}
+PopUpManager.setCallback = function (oOpenWin, sMsg, oData) {
+  if (this._instance.getPluginWin().hasValue(oOpenWin)) {
+    var key = this._instance.getCorrectKey(this._instance.getPluginWin(), oOpenWin);
+    if (key) {
+      this._instance.getPlugin().$(key).exec(sMsg, oData);
+    }
+  }
 };
 
 /**
  * @description opener에 허스키 함수를 실행시키고 데이터 값을 리턴 받음.
- * @param 
+ * @param
  */
-nhn.husky.PopUpManager.getFunc = function(oOpenWin, sFunc) {
-	if (this._instance.getPluginWin().hasValue(oOpenWin)) {
-		var key = this._instance.getCorrectKey(this._instance.getPluginWin(), oOpenWin);
-		if (key) {
-			return this._instance.getPlugin().$(key)[sFunc]();
-		}
-	}
+PopUpManager.getFunc = function (oOpenWin, sFunc) {
+  if (this._instance.getPluginWin().hasValue(oOpenWin)) {
+    var key = this._instance.getCorrectKey(this._instance.getPluginWin(), oOpenWin);
+    if (key) {
+      return this._instance.getPlugin().$(key)[sFunc]();
+    }
+  }
 };
-

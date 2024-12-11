@@ -48,63 +48,69 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 /**
  * @pluginDesc 한번에 한개만 화면에 보여야 하는 레이어를 관리하는 플러그인
  */
-nhn.husky.ActiveLayerManager = jindo.$Class({
-	name : "ActiveLayerManager",
-	oCurrentLayer : null,
-	
-	$BEFORE_MSG_APP_READY : function() {
-		this.oNavigator = jindo.$Agent().navigator();
-	},
-	
-	$ON_TOGGLE_ACTIVE_LAYER : function(oLayer, sOnOpenCmd, aOnOpenParam, sOnCloseCmd, aOnCloseParam){
-		if(oLayer == this.oCurrentLayer){
-			this.oApp.exec("HIDE_ACTIVE_LAYER", []);
-		}else{
-			this.oApp.exec("SHOW_ACTIVE_LAYER", [oLayer, sOnCloseCmd, aOnCloseParam]);
-			if(sOnOpenCmd){this.oApp.exec(sOnOpenCmd, aOnOpenParam);}
-		}
-	},
-	
-	$ON_SHOW_ACTIVE_LAYER : function(oLayer, sOnCloseCmd, aOnCloseParam){
-		oLayer = jindo.$(oLayer);
+export const ActiveLayerManager = jindo.$Class({
+  name: 'ActiveLayerManager',
+  oCurrentLayer: null,
 
-		var oPrevLayer = this.oCurrentLayer;
-		if(oLayer == oPrevLayer){return;}
+  $BEFORE_MSG_APP_READY: function () {
+    this.oNavigator = jindo.$Agent().navigator();
+  },
 
-		this.oApp.exec("HIDE_ACTIVE_LAYER", []);
-		
-		this.sOnCloseCmd = sOnCloseCmd;
-		this.aOnCloseParam = aOnCloseParam;
+  $ON_TOGGLE_ACTIVE_LAYER: function (oLayer, sOnOpenCmd, aOnOpenParam, sOnCloseCmd, aOnCloseParam) {
+    if (oLayer == this.oCurrentLayer) {
+      this.oApp.exec('HIDE_ACTIVE_LAYER', []);
+    } else {
+      this.oApp.exec('SHOW_ACTIVE_LAYER', [oLayer, sOnCloseCmd, aOnCloseParam]);
+      if (sOnOpenCmd) {
+        this.oApp.exec(sOnOpenCmd, aOnOpenParam);
+      }
+    }
+  },
 
-		oLayer.style.display = "block";
-		this.oCurrentLayer = oLayer;
-		this.oApp.exec("ADD_APP_PROPERTY", ["oToolBarLayer", this.oCurrentLayer]);
-	},
+  $ON_SHOW_ACTIVE_LAYER: function (oLayer, sOnCloseCmd, aOnCloseParam) {
+    oLayer = jindo.$(oLayer);
 
-	$ON_HIDE_ACTIVE_LAYER : function(){
-		var oLayer = this.oCurrentLayer;
-		if(!oLayer){return;}
-		oLayer.style.display = "none";
-		this.oCurrentLayer = null;
-		if(this.sOnCloseCmd){
-			this.oApp.exec(this.sOnCloseCmd, this.aOnCloseParam);
-		}
-	},
-	
-	$ON_HIDE_ACTIVE_LAYER_IF_NOT_CHILD : function(el){
-		var elTmp = el;
-		while(elTmp){
-			if(elTmp == this.oCurrentLayer){
-				return;
-			}
-			elTmp = elTmp.parentNode;
-		}
-		this.oApp.exec("HIDE_ACTIVE_LAYER");
-	},
+    var oPrevLayer = this.oCurrentLayer;
+    if (oLayer == oPrevLayer) {
+      return;
+    }
 
-	// for backward compatibility only.
-	// use HIDE_ACTIVE_LAYER instead!
-	$ON_HIDE_CURRENT_ACTIVE_LAYER : function(){
-		this.oApp.exec("HIDE_ACTIVE_LAYER", []);
-	}
+    this.oApp.exec('HIDE_ACTIVE_LAYER', []);
+
+    this.sOnCloseCmd = sOnCloseCmd;
+    this.aOnCloseParam = aOnCloseParam;
+
+    oLayer.style.display = 'block';
+    this.oCurrentLayer = oLayer;
+    this.oApp.exec('ADD_APP_PROPERTY', ['oToolBarLayer', this.oCurrentLayer]);
+  },
+
+  $ON_HIDE_ACTIVE_LAYER: function () {
+    var oLayer = this.oCurrentLayer;
+    if (!oLayer) {
+      return;
+    }
+    oLayer.style.display = 'none';
+    this.oCurrentLayer = null;
+    if (this.sOnCloseCmd) {
+      this.oApp.exec(this.sOnCloseCmd, this.aOnCloseParam);
+    }
+  },
+
+  $ON_HIDE_ACTIVE_LAYER_IF_NOT_CHILD: function (el) {
+    var elTmp = el;
+    while (elTmp) {
+      if (elTmp == this.oCurrentLayer) {
+        return;
+      }
+      elTmp = elTmp.parentNode;
+    }
+    this.oApp.exec('HIDE_ACTIVE_LAYER');
+  },
+
+  // for backward compatibility only.
+  // use HIDE_ACTIVE_LAYER instead!
+  $ON_HIDE_CURRENT_ACTIVE_LAYER: function () {
+    this.oApp.exec('HIDE_ACTIVE_LAYER', []);
+  }
 });

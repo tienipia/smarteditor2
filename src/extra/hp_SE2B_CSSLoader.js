@@ -1,4 +1,5 @@
 import { SE2M_Configuration } from '../config.js';
+import { SE2M_Utils } from '../util';
 
 export const SE2B_CSSLoader = jindo.$Class({
   name: 'SE2B_CSSLoader',
@@ -96,14 +97,14 @@ export const SE2B_CSSLoader = jindo.$Class({
       fnCallback = jindo.$Fn(this.oApp.exec, this.oApp).bind(sMsg, oArgs);
     }
 
-    //nhn.husky.SE2M_Utils.loadCSS("css/smart_editor2.css");
+    //SE2M_Utils.loadCSS("css/smart_editor2.css");
     var sCssUrl = this.htOptions.sCSSBaseURI;
     var sLocale = this.oApp && this.oApp.htOptions.I18N_LOCALE;
     if (sLocale) {
       sCssUrl += '/' + sLocale;
     }
     sCssUrl += '/smart_editor2_items.css';
-    nhn.husky.SE2M_Utils.loadCSS(sCssUrl, fnCallback);
+    SE2M_Utils.loadCSS(sCssUrl, fnCallback);
 
     return false;
   }

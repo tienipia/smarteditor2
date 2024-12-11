@@ -1,5 +1,6 @@
 import { SE2M_Configuration } from '../../config';
 import { PLUGIN_STATUS } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 /*[
  * ENABLE_WYSIWYG
@@ -197,8 +198,8 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
    * [SMARTEDITORSUS-2315] setContents가 될때 폰트태그를 정제해준다.
    */
   _dbToIrDOM: function (oTmpNode) {
-    nhn.husky.SE2M_Utils.removeInvalidFont(oTmpNode);
-    nhn.husky.SE2M_Utils.convertFontToSpan(oTmpNode);
+    SE2M_Utils.removeInvalidFont(oTmpNode);
+    SE2M_Utils.convertFontToSpan(oTmpNode);
   },
 
   /**

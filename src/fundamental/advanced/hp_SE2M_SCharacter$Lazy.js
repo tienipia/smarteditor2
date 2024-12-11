@@ -1,4 +1,5 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 HuskyCore.addLoadedFile('hp_SE2M_SCharacter$Lazy.js');
 /**
@@ -124,7 +125,7 @@ HuskyCore.mixin(nhn.husky.SE2M_SCharacter, {
   },
 
   $ON_EVENT_SCHARACTER_CLICKED: function (weEvent) {
-    var elButton = nhn.husky.SE2M_Utils.findAncestorByTagName('BUTTON', weEvent.element);
+    var elButton = SE2M_Utils.findAncestorByTagName('BUTTON', weEvent.element);
     if (!elButton || elButton.tagName != 'BUTTON') {
       return;
     }

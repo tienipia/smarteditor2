@@ -1,4 +1,5 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 HuskyCore.addLoadedFile('hp_SE2M_TableCreator$Lazy.js');
 /**
@@ -370,10 +371,10 @@ HuskyCore.mixin(nhn.husky.SE2M_TableCreator, {
      * */
     //oParentP = oSelection.findAncestorByTagName("P");
     var _elCommonAncestorContainer = oSelection.commonAncestorContainer;
-    var _htAncestor_P = nhn.husky.SE2M_Utils.findAncestorByTagNameWithCount('P', _elCommonAncestorContainer);
+    var _htAncestor_P = SE2M_Utils.findAncestorByTagNameWithCount('P', _elCommonAncestorContainer);
     var _elAncestor_P = _htAncestor_P.elNode;
     if (_elAncestor_P) {
-      var _htAncestor_Cell = nhn.husky.SE2M_Utils.findClosestAncestorAmongTagNamesWithCount(
+      var _htAncestor_Cell = SE2M_Utils.findClosestAncestorAmongTagNamesWithCount(
         ['TD', 'TH'],
         _elCommonAncestorContainer
       );
@@ -399,7 +400,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableCreator, {
       return oSelection;
     }
 
-    if (!oParentP.firstChild || nhn.husky.SE2M_Utils.isBlankNode(oParentP)) {
+    if (!oParentP.firstChild || SE2M_Utils.isBlankNode(oParentP)) {
       oSelection.selectNode(oParentP); // [SMARTEDITORSUS-423] 불필요한 개행이 일어나지 않도록 빈 P 를 선택하여 TABLE 로 대체하도록 처리
       oSelection.select();
 

@@ -1,5 +1,6 @@
 import { SE2M_Configuration } from '../../config';
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 HuskyCore.addLoadedFile('hp_SE2M_TableEditor$Lazy.js');
 /**
@@ -651,7 +652,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
       elTD = this.aSelectedCells[i];
 
       if (elTD.parentNode) {
-        if (!nhn.husky.SE2M_Utils.isBlankNode(elTD)) {
+        if (!SE2M_Utils.isBlankNode(elTD)) {
           elFirstTD.innerHTML += elTD.innerHTML;
         }
 
@@ -1018,14 +1019,14 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
 
         // change the status to MOUSEDOWN_CELL if the mouse is over a table cell
         // [SMARTEDITORSUS-1672]
-        /*var elTD = nhn.husky.SE2M_Utils.findAncestorByTagName("TD", wevE.element);
+        /*var elTD = SE2M_Utils.findAncestorByTagName("TD", wevE.element);
 			
 			if(elTD && elTD.tagName == "TD"){*/
-        var elTD = nhn.husky.SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
+        var elTD = SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
 
         if (elTD && this._rxCellNames.test(elTD.tagName)) {
           // --[SMARTEDITORSUS-1672]
-          var elTBL = nhn.husky.SE2M_Utils.findAncestorByTagName('TABLE', elTD);
+          var elTBL = SE2M_Utils.findAncestorByTagName('TABLE', elTD);
 
           if (
             !jindo.$Element(elTBL).hasClass(this._sSETblClass) &&
@@ -1094,8 +1095,8 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
       case this.STATUS.MOUSEDOWN_CELL:
         // change the status to CELL_SELECTING if the mouse moved out of the inital TD
         // [SMARTEDITORSUS-1672]
-        //var elTD = nhn.husky.SE2M_Utils.findAncestorByTagName("TD", wevE.element);
-        var elTD = nhn.husky.SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
+        //var elTD = SE2M_Utils.findAncestorByTagName("TD", wevE.element);
+        var elTD = SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
         // --[SMARTEDITORSUS-1672]
         if ((elTD && elTD !== this.elSelectionStartTD) || !elTD) {
           if (!elTD) {
@@ -1111,14 +1112,14 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
       case this.STATUS.CELL_SELECTING:
         // show selection
         // [SMARTEDITORSUS-1672]
-        //var elTD = nhn.husky.SE2M_Utils.findAncestorByTagName("TD", wevE.element);
-        elTD = nhn.husky.SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
+        //var elTD = SE2M_Utils.findAncestorByTagName("TD", wevE.element);
+        elTD = SE2M_Utils.findClosestAncestorAmongTagNames(this._aCellName, wevE.element);
         // --[SMARTEDITORSUS-1672]
         if (!elTD || elTD === this.elLastSelectedTD) {
           return;
         }
 
-        var elTBL = nhn.husky.SE2M_Utils.findAncestorByTagName('TABLE', elTD);
+        var elTBL = SE2M_Utils.findAncestorByTagName('TABLE', elTD);
         if (elTBL !== this.elSelectionStartTable) {
           return;
         }
@@ -1363,10 +1364,10 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
       nTableHeightAdjustRatio = 1; // 셀 크기 변경 시 사용되는 보정계수
 
     if (
-      nhn.husky.SE2M_Utils.isNumber(nTableWidth) &&
-      nhn.husky.SE2M_Utils.isNumber(nTableHeight) &&
-      nhn.husky.SE2M_Utils.isNumber(nResizedTableWidth) &&
-      nhn.husky.SE2M_Utils.isNumber(nResizedTableHeight)
+      SE2M_Utils.isNumber(nTableWidth) &&
+      SE2M_Utils.isNumber(nTableHeight) &&
+      SE2M_Utils.isNumber(nResizedTableWidth) &&
+      SE2M_Utils.isNumber(nResizedTableHeight)
     ) {
       // [IE] resizeend 정보가 기록되어 있다면, 셀 크기 변경 시 보정계수 조정
       (nTableWidthAdjustRatio = nResizedTableWidth / nTableWidth),
@@ -1375,10 +1376,10 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
 
     // [IE] 기록해 둔 resizeend 크기는 일회성으로 사용한다.
     if (elTable._nResizedWidth) {
-      nhn.husky.SE2M_Utils.deleteProperty(elTable, '_nResizedWidth');
+      SE2M_Utils.deleteProperty(elTable, '_nResizedWidth');
     }
     if (elTable._nResizedHeight) {
-      nhn.husky.SE2M_Utils.deleteProperty(elTable, '_nResizedHeight');
+      SE2M_Utils.deleteProperty(elTable, '_nResizedHeight');
     }
     // --[SMARTEDITORSUS-2136]
 
@@ -1706,7 +1707,7 @@ HuskyCore.mixin(nhn.husky.SE2M_TableEditor, {
     }
     // --[SMARTEDITORSUS-1672]
 
-    this.htResizing.elTable = nhn.husky.SE2M_Utils.findAncestorByTagName('TABLE', this.htResizing.elCell);
+    this.htResizing.elTable = SE2M_Utils.findAncestorByTagName('TABLE', this.htResizing.elCell);
     if (!this.htResizing.elTable) {
       return;
     }

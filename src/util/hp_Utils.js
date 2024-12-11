@@ -27,48 +27,58 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 /**
  * @pluginDesc Husky Framework에서 자주 사용되는 유틸성 메시지를 처리하는 플러그인
  */
- nhn.husky.Utils = jindo.$Class({
-	name : "Utils",
+export const Utils = jindo.$Class({
+  name: 'Utils',
 
-	$init : function(){
-		var oAgentInfo = jindo.$Agent();
-		var oNavigatorInfo = oAgentInfo.navigator();
+  $init: function () {
+    var oAgentInfo = jindo.$Agent();
+    var oNavigatorInfo = oAgentInfo.navigator();
 
-		if(oNavigatorInfo.ie && oNavigatorInfo.version == 6){
-			try{
-				document.execCommand('BackgroundImageCache', false, true);
-			}catch(e){/**/}
-		}
-	},
-	
-	$BEFORE_MSG_APP_READY : function(){
-		this.oApp.exec("ADD_APP_PROPERTY", ["htBrowser", jindo.$Agent().navigator()]);
-	},
-	
-	$ON_ATTACH_HOVER_EVENTS : function(aElms, htOptions){
-		htOptions = htOptions || [];
-		var sHoverClass = htOptions.sHoverClass || "hover";
-		var fnElmToSrc = htOptions.fnElmToSrc || function(el){return el};
-		var fnElmToTarget = htOptions.fnElmToTarget || function(el){return el};
-		
-		if(!aElms) return;
-		
-		var wfAddClass = jindo.$Fn(function(wev){
-			jindo.$Element(fnElmToTarget(wev.currentElement)).addClass(sHoverClass);
-		}, this);
-		
-		var wfRemoveClass = jindo.$Fn(function(wev){
-			jindo.$Element(fnElmToTarget(wev.currentElement)).removeClass(sHoverClass);
-		}, this);
-		
-		for(var i=0, len = aElms.length; i<len; i++){
-			var elSource = fnElmToSrc(aElms[i]);
-			
-			wfAddClass.attach(elSource, "mouseover");
-			wfRemoveClass.attach(elSource, "mouseout");
-			
-			wfAddClass.attach(elSource, "focus");
-			wfRemoveClass.attach(elSource, "blur");
-		}
-	}
+    if (oNavigatorInfo.ie && oNavigatorInfo.version == 6) {
+      try {
+        document.execCommand('BackgroundImageCache', false, true);
+      } catch (e) {
+        /**/
+      }
+    }
+  },
+
+  $BEFORE_MSG_APP_READY: function () {
+    this.oApp.exec('ADD_APP_PROPERTY', ['htBrowser', jindo.$Agent().navigator()]);
+  },
+
+  $ON_ATTACH_HOVER_EVENTS: function (aElms, htOptions) {
+    htOptions = htOptions || [];
+    var sHoverClass = htOptions.sHoverClass || 'hover';
+    var fnElmToSrc =
+      htOptions.fnElmToSrc ||
+      function (el) {
+        return el;
+      };
+    var fnElmToTarget =
+      htOptions.fnElmToTarget ||
+      function (el) {
+        return el;
+      };
+
+    if (!aElms) return;
+
+    var wfAddClass = jindo.$Fn(function (wev) {
+      jindo.$Element(fnElmToTarget(wev.currentElement)).addClass(sHoverClass);
+    }, this);
+
+    var wfRemoveClass = jindo.$Fn(function (wev) {
+      jindo.$Element(fnElmToTarget(wev.currentElement)).removeClass(sHoverClass);
+    }, this);
+
+    for (var i = 0, len = aElms.length; i < len; i++) {
+      var elSource = fnElmToSrc(aElms[i]);
+
+      wfAddClass.attach(elSource, 'mouseover');
+      wfRemoveClass.attach(elSource, 'mouseout');
+
+      wfAddClass.attach(elSource, 'focus');
+      wfRemoveClass.attach(elSource, 'blur');
+    }
+  }
 });

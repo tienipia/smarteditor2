@@ -1,4 +1,5 @@
 import { DOMFix } from '../../husky_framework';
+import { SE2M_Utils } from '../../util';
 
 /**
  * @pluginDesc Enter키 입력시에 현재 줄을 P 태그로 감거나 <br> 태그를 삽입한다.
@@ -122,7 +123,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 
       if (
         !oNodeChild ||
-        (oNodeChild.nodeType == 3 && nhn.husky.SE2M_Utils.isBlankTextNode(oNodeChild)) ||
+        (oNodeChild.nodeType == 3 && SE2M_Utils.isBlankTextNode(oNodeChild)) ||
         (oNodeChild.nodeType == 1 &&
           oNode.childNodes.length == 1 &&
           (oNodeChild.id.indexOf(oSelection.HUSKY_BOOMARK_START_ID_PREFIX) > -1 ||
@@ -364,13 +365,12 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
         0
       );
 
-      bAddUnderline =
-        elParentNode.tagName === 'U' || nhn.husky.SE2M_Utils.findAncestorByTagName('U', elParentNode) !== null;
+      bAddUnderline = elParentNode.tagName === 'U' || SE2M_Utils.findAncestorByTagName('U', elParentNode) !== null;
       bAddLineThrough =
         elParentNode.tagName === 'S' ||
         elParentNode.tagName === 'STRIKE' ||
-        (nhn.husky.SE2M_Utils.findAncestorByTagName('S', elParentNode) !== null &&
-          nhn.husky.SE2M_Utils.findAncestorByTagName('STRIKE', elParentNode) !== null);
+        (SE2M_Utils.findAncestorByTagName('S', elParentNode) !== null &&
+          SE2M_Utils.findAncestorByTagName('STRIKE', elParentNode) !== null);
 
       // [SMARTEDITORSUS-26] Enter 후에 밑줄/취소선이 복사되지 않는 문제를 처리 (브라우저 Enter 처리 후 실행되도록 setTimeout 사용)
       if (bAddUnderline || bAddLineThrough) {
@@ -467,7 +467,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
           continue;
         }
 
-        if (nhn.husky.SE2M_Utils.isBlankTextNode(oNodeChild)) {
+        if (SE2M_Utils.isBlankTextNode(oNodeChild)) {
           oNodeChild.parentNode.removeChild(oNodeChild);
         }
 
@@ -698,7 +698,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 
     // [SMARTEDITORSUS-227] TEXT_NODE 가 return 되는 문제를 수정함. IE 에서 TEXT_NODE 의 innrHTML 에 접근하면 오류 발생
     if (elNode.firstChild.nodeType === 3) {
-      return nhn.husky.SE2M_Utils.isBlankTextNode(elNode.firstChild) ? elNode : null;
+      return SE2M_Utils.isBlankTextNode(elNode.firstChild) ? elNode : null;
       //return (elNode.firstChild.textContents === null || elNode.firstChild.textContents === "") ? elNode : null;
     }
 
