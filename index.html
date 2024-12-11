@@ -13,9 +13,6 @@
     </style>
     <script charset="utf-8" src="/js/lib/jindo2.all.js" type="text/javascript"></script>
     <script charset="utf-8" src="/js/lib/jindo_component.js" type="text/javascript"></script>
-    <script charset="utf-8" src="/js/service/SE2M_Configuration.js" type="text/javascript"></script>
-    <!-- 설정 파일 -->
-    <script charset="utf-8" src="/js/service/SE2BasicCreator.js" type="text/javascript"></script>
   </head>
   <body>
     <!-- SE2 Markup Start -->
@@ -1996,7 +1993,16 @@
         >
       </form>
     </div>
-    <script charset="utf-8" src="./src/bundle/index.js" type="module"></script>
+    <script>
+      if (!nhn) {
+        nhn = {};
+      }
+
+      if (!nhn.husky) {
+        nhn.husky = {};
+      }
+    </script>
+    <script src="./src/bundle/index.js" type="module"></script>
     <!--Example End-->
   </body>
 </html>

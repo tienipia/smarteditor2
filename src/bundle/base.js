@@ -30,7 +30,6 @@ import "../fundamental/advanced/hp_SE2M_TableEditor.js";
 import "../quick_editor/hp_SE2M_QuickEditor_Common.js";
 import "../shortcut/shortcut.js";
 import "../shortcut/hp_Hotkey.js";
-import "../undo_redo/hp_SE_UndoRedo.js";
 import "../util/hp_Utils.js";
 import "../util/hp_DialogLayerManager.js";
 import "../util/hp_ActiveLayerManager.js";
