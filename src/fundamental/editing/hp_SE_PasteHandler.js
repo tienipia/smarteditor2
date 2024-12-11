@@ -3,7 +3,7 @@ import { SE2M_Utils } from '../../util';
 /**
  * @pluginDesc WYSIWYG 영역에 붙여넣어지는 외부 컨텐츠를 정제하는 플러그인
  */
-nhn.husky.SE_PasteHandler = jindo.$Class({
+export const SE_PasteHandler = jindo.$Class({
   name: 'SE_PasteHandler',
   _rxStyleTag: /<style(?:\s+[^>]*)?>(?:.|\r|\n)*?<\/style>/gi,
   _rxStyleTagStrip: /<\/?style(?:\s+[^>]*)?>/gi,

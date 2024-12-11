@@ -4,7 +4,7 @@ import { SE2M_Utils } from '../../util';
 /**
  * @pluginDesc Enter키 입력시에 현재 줄을 P 태그로 감거나 <br> 태그를 삽입한다.
  */
-nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
+export const SE_WYSIWYGEnterKey = jindo.$Class({
   name: 'SE_WYSIWYGEnterKey',
 
   $init: function (sLineBreaker) {

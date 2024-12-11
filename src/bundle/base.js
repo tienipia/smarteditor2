@@ -5,20 +5,13 @@ import '../fundamental/advanced/hp_SE2M_StyleRemover.js';
 import '../fundamental/advanced/hp_SE2M_TableBlockStyler.js';
 import '../fundamental/advanced/hp_SE2M_TableCreator.js';
 import '../fundamental/advanced/hp_SE2M_TableEditor.js';
-import '../fundamental/editing/hp_SE2M_EditingModeChanger.js';
-import '../fundamental/editing/hp_SE_EditingAreaManager.js';
-import '../fundamental/editing/hp_SE_EditingAreaVerticalResizer.js';
-import '../fundamental/editing/hp_SE_EditingArea_HTMLSrc.js';
-import '../fundamental/editing/hp_SE_EditingArea_TEXT.js';
-import '../fundamental/editing/hp_SE_EditingArea_WYSIWYG.js';
-import '../fundamental/editing/hp_SE_PasteHandler.js';
-import '../fundamental/editing/hp_SE_WYSIWYGEnterKey.js';
+import { SE_EditingAreaManager } from '../fundamental/editing';
 
 const __VERSION__ = '2.0.0';
 const __HASH__ = 'b1e2f4c';
 
 window.nSE2Version = __VERSION__ + '.' + __HASH__;
-nhn.husky.SE_EditingAreaManager.version = {
+SE_EditingAreaManager.version = {
   revision: __HASH__,
   type: 'open',
   number: __VERSION__

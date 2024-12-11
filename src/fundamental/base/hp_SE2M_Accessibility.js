@@ -131,7 +131,7 @@ export const SE2M_Accessibility = jindo.$Class({
   },
 
   /**
-   * [SMARTEDITORSUS-1594] DIV#smart_editor2 다음 요소에서 가장 가까운 포커스용 태그를 탐색
+   * [SMARTEDITORSUS-1594] DIV.saeroun-editor 다음 요소에서 가장 가까운 포커스용 태그를 탐색
    * */
   _findNextFocusElement: function (targetElement) {
     var target = null;
@@ -337,7 +337,7 @@ export const SE2M_Accessibility = jindo.$Class({
   },
 
   /**
-   * [SMARTEDITORSUS-1594] DIV#smart_editor2 이전 요소에서 가장 가까운 포커스용 태그를 탐색
+   * [SMARTEDITORSUS-1594] DIV.saeroun-editor 이전 요소에서 가장 가까운 포커스용 태그를 탐색
    * */
   _findPreviousFocusElement: function (targetElement) {
     var target = null;

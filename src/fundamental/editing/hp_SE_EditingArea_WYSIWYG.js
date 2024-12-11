@@ -38,7 +38,7 @@ import { SE2M_Utils } from '../../util';
 /**
  * @pluginDesc WYSIWYG 모드를 제공하는 플러그인
  */
-nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
+export const SE_EditingArea_WYSIWYG = jindo.$Class({
   name: 'SE_EditingArea_WYSIWYG',
   status: PLUGIN_STATUS.NOT_READY,
 

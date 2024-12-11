@@ -5,17 +5,21 @@ import './lazy';
 if (window.frameElement) {
   jindo.$('se2_sample').style.display = 'none';
 } else {
-  var oEditor = createSEditor2(jindo.$('ir1'), {
-    bUseToolbar: true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-    bUseVerticalResizer: true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-    bUseModeChanger: true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-    //bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
-    //aAdditionalFontList : [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]],	// 추가 글꼴 목록
-    fOnBeforeUnload: function () {
-      //예제 코드
-      //return "내용이 변경되었습니다.";
-    }
-  });
+  var oEditor = createSEditor2(
+    jindo.$('ir1'),
+    {
+      bUseToolbar: true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+      bUseVerticalResizer: true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+      bUseModeChanger: true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+      //bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+      //aAdditionalFontList : [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]],	// 추가 글꼴 목록
+      fOnBeforeUnload: function () {
+        //예제 코드
+        //return "내용이 변경되었습니다.";
+      }
+    },
+    document.getElementsByClassName('saeroun-editor')[0]
+  );
 
   oEditor.run({
     fnOnAppReady: function () {

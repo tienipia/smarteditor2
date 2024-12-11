@@ -14,6 +14,16 @@ import {
   SE_WYSIWYGStyleGetter,
   SE_WYSIWYGStyler
 } from './fundamental/base';
+import {
+  SE2M_EditingModeChanger,
+  SE_EditingAreaManager,
+  SE_EditingAreaVerticalResizer,
+  SE_EditingArea_HTMLSrc,
+  SE_EditingArea_TEXT,
+  SE_EditingArea_WYSIWYG,
+  SE_PasteHandler,
+  SE_WYSIWYGEnterKey
+} from './fundamental/editing';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { SE2M_QuickEditor_Common } from './quick_editor/hp_SE2M_QuickEditor_Common';
@@ -35,7 +45,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
     return;
   }
 
-  var elAppContainer = elSeAppContainer || jindo.$('smart_editor2');
+  var elAppContainer = elSeAppContainer;
   var elEditingArea = jindo.$$.getSingle('DIV.husky_seditor_editing_area_container', elAppContainer);
   var oWYSIWYGIFrame = jindo.$$.getSingle('IFRAME.se2_input_wysiwyg', elEditingArea);
   var oIRTextarea = elIRField ? elIRField : jindo.$$.getSingle('TEXTAREA.blind', elEditingArea);
@@ -85,13 +95,13 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   var aAdditionalFontList = htParams.aAdditionalFontList;
 
   oEditor.registerPlugin(
-    new nhn.husky.SE_EditingAreaManager('WYSIWYG', oIRTextarea, htDimension, htParams.fOnBeforeUnload, elAppContainer)
+    new SE_EditingAreaManager('WYSIWYG', oIRTextarea, htDimension, htParams.fOnBeforeUnload, elAppContainer)
   );
-  oEditor.registerPlugin(new nhn.husky.SE_EditingArea_WYSIWYG(oWYSIWYGIFrame)); // Tab Editor 모드
-  oEditor.registerPlugin(new nhn.husky.SE_EditingArea_HTMLSrc(oHTMLSrc)); // Tab HTML 모드
-  oEditor.registerPlugin(new nhn.husky.SE_EditingArea_TEXT(oTextArea)); // Tab Text 모드
-  oEditor.registerPlugin(new nhn.husky.SE2M_EditingModeChanger(elAppContainer, htConversionMode)); // 모드간 변경(Editor, HTML, Text)
-  oEditor.registerPlugin(new nhn.husky.SE_PasteHandler()); // WYSIWYG Paste Handler
+  oEditor.registerPlugin(new SE_EditingArea_WYSIWYG(oWYSIWYGIFrame)); // Tab Editor 모드
+  oEditor.registerPlugin(new SE_EditingArea_HTMLSrc(oHTMLSrc)); // Tab HTML 모드
+  oEditor.registerPlugin(new SE_EditingArea_TEXT(oTextArea)); // Tab Text 모드
+  oEditor.registerPlugin(new SE2M_EditingModeChanger(elAppContainer, htConversionMode)); // 모드간 변경(Editor, HTML, Text)
+  oEditor.registerPlugin(new SE_PasteHandler()); // WYSIWYG Paste Handler
 
   oEditor.registerPlugin(new HuskyRangeManager(oWYSIWYGIFrame));
   oEditor.registerPlugin(new Utils());
@@ -100,12 +110,12 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new SE2M_Toolbar(elAppContainer));
 
   oEditor.registerPlugin(new Hotkey()); // 단축키
-  oEditor.registerPlugin(new nhn.husky.SE_EditingAreaVerticalResizer(elAppContainer, htConversionMode)); // 편집영역 리사이즈
+  oEditor.registerPlugin(new SE_EditingAreaVerticalResizer(elAppContainer, htConversionMode)); // 편집영역 리사이즈
   oEditor.registerPlugin(new DialogLayerManager());
   oEditor.registerPlugin(new ActiveLayerManager());
   oEditor.registerPlugin(new SE_WYSIWYGStyleGetter()); // 커서 위치 스타일 정보 가져오기
 
-  oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey('P')); // 엔터 시 처리, 현재는 P로 처리
+  oEditor.registerPlugin(new SE_WYSIWYGEnterKey('P')); // 엔터 시 처리, 현재는 P로 처리
 
   oEditor.registerPlugin(new SE2M_ColorPalette(elAppContainer)); // 색상 팔레트
   oEditor.registerPlugin(new SE2M_FontColor(elAppContainer)); // 글자색
