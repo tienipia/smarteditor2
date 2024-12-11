@@ -1,5 +1,5 @@
 import { HuskyCore } from './husky_framework';
-import { CorePlugin } from './husky_framework';
+import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { Hotkey } from './shortcut/hp_Hotkey';
 import { SE_UndoRedo } from './undo_redo/hp_SE_UndoRedo';
 
@@ -68,7 +68,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new nhn.husky.SE2M_EditingModeChanger(elAppContainer, htConversionMode)); // 모드간 변경(Editor, HTML, Text)
   oEditor.registerPlugin(new nhn.husky.SE_PasteHandler()); // WYSIWYG Paste Handler
 
-  oEditor.registerPlugin(new nhn.husky.HuskyRangeManager(oWYSIWYGIFrame));
+  oEditor.registerPlugin(new HuskyRangeManager(oWYSIWYGIFrame));
   oEditor.registerPlugin(new nhn.husky.Utils());
   oEditor.registerPlugin(new nhn.husky.SE2M_UtilPlugin());
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyler());
