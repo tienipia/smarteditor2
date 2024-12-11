@@ -1,4 +1,3 @@
-import '../common/base/hp_SE2M_Toolbar.js';
 import '../fundamental/advanced/hp_SE2M_FindReplacePlugin.js';
 import '../fundamental/advanced/hp_SE2M_Quote.js';
 import '../fundamental/advanced/hp_SE2M_SCharacter.js';

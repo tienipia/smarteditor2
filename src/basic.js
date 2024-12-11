@@ -1,3 +1,4 @@
+import { SE2M_Toolbar } from './common/base/hp_SE2M_Toolbar';
 import { SE2B_CSSLoader, SE_OuterIFrameControl, SE_ToolbarToggler } from './extra';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
@@ -81,7 +82,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new Utils());
   oEditor.registerPlugin(new SE2M_UtilPlugin());
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyler());
-  oEditor.registerPlugin(new nhn.husky.SE2M_Toolbar(elAppContainer));
+  oEditor.registerPlugin(new SE2M_Toolbar(elAppContainer));
 
   oEditor.registerPlugin(new Hotkey()); // 단축키
   oEditor.registerPlugin(new nhn.husky.SE_EditingAreaVerticalResizer(elAppContainer, htConversionMode)); // 편집영역 리사이즈
