@@ -1,8 +1,5 @@
 import { SE2M_Configuration } from '../config';
 
-if (!nhn.husky) {
-  nhn.husky = {};
-}
 /*[
  * ADD_APP_PROPERTY
  *
@@ -52,7 +49,7 @@ if (!nhn.husky) {
 /**
  * @pluginDesc Husky Framework에서 자주 사용되는 메시지를 처리하는 플러그인
  */
-nhn.husky.CorePlugin = jindo.$Class({
+export const CorePlugin = jindo.$Class({
   name: 'CorePlugin',
 
   // nStatus = 0(request not sent), 1(request sent), 2(response received)

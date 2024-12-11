@@ -1,4 +1,5 @@
 import { HuskyCore } from './husky_framework';
+import { CorePlugin } from './husky_framework';
 import { Hotkey } from './shortcut/hp_Hotkey';
 import { SE_UndoRedo } from './undo_redo/hp_SE_UndoRedo';
 
@@ -25,7 +26,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   htParams.I18N_LOCALE = htParams.I18N_LOCALE || 'ko_KR';
 
   var oEditor = new HuskyCore(htParams);
-  oEditor.registerPlugin(new nhn.husky.CorePlugin(htParams ? htParams.fOnAppLoad : null));
+  oEditor.registerPlugin(new CorePlugin(htParams ? htParams.fOnAppLoad : null));
   oEditor.registerPlugin(new nhn.husky.StringConverterManager());
   if (htParams.bSkipXssFilter !== true) {
     // 보안 필터링 플러그인 (TODO:소스분리 및 블랙리스트 옵션 추가)
