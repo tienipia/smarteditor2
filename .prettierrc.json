@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    "prettier-plugin-organize-attributes",
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "semi": true,
+  "trailingComma": "none",
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "tabWidth": 2,
+  "bracketSameLine": true,
+  "arrowParens": "always",
+  "htmlWhitespaceSensitivity": "strict",
+  "vueIndentScriptAndStyle": true,
+  "endOfLine": "lf",
+  "attributeSort": "ASC",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
