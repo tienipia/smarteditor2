@@ -1,11 +1,12 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_FontColor } from './hp_SE2M_FontColor';
 
 HuskyCore.addLoadedFile('hp_SE2M_FontColor$Lazy.js');
 /**
  * @depends nhn.husky.SE2M_FontColor
  * this.oApp.registerLazyMessage(["APPLY_LAST_USED_FONTCOLOR", "TOGGLE_FONTCOLOR_LAYER"], ["hp_SE2M_FontColor$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_FontColor, {
+HuskyCore.mixin(SE2M_FontColor, {
   //@lazyload_js APPLY_LAST_USED_FONTCOLOR,TOGGLE_FONTCOLOR_LAYER[
   $ON_TOGGLE_FONTCOLOR_LAYER: function () {
     this.oApp.exec('TOGGLE_TOOLBAR_ACTIVE_LAYER', [

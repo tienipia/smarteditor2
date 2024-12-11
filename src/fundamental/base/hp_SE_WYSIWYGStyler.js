@@ -6,7 +6,7 @@ import { SE2M_Utils } from '../../util';
  * @name hp_SE_WYSIWYGStyler.js
  * @required SE_EditingArea_WYSIWYG, HuskyRangeManager
  */
-nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
+export const SE_WYSIWYGStyler = jindo.$Class({
   name: 'SE_WYSIWYGStyler',
   _sCursorHolder: '\uFEFF',
 

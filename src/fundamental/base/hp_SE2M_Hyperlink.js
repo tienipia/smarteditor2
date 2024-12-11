@@ -4,7 +4,7 @@ import { SE2M_Configuration } from '../../config';
  * @fileOverview This file contains Husky plugin that takes care of the operations related to hyperlink
  * @name hp_SE_Hyperlink.js
  */
-nhn.husky.SE2M_Hyperlink = jindo.$Class({
+export const SE2M_Hyperlink = jindo.$Class({
   name: 'SE2M_Hyperlink',
   sATagMarker: 'HTTP://HUSKY_TMP.MARKER/',
 

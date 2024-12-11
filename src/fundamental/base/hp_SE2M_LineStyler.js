@@ -6,7 +6,7 @@ import { SE2M_Utils } from '../../util';
  * @fileOverview This file contains Husky plugin that takes care of the operations related to setting/changing the line style
  * @name hp_SE_LineStyler.js
  */
-nhn.husky.SE2M_LineStyler = jindo.$Class({
+export const SE2M_LineStyler = jindo.$Class({
   name: 'SE2M_LineStyler',
 
   $BEFORE_MSG_APP_READY: function () {

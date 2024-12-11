@@ -1,11 +1,12 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_LineHeightWithLayerUI } from './hp_SE2M_LineHeightWithLayerUI';
 
 HuskyCore.addLoadedFile('hp_SE2M_LineHeightWithLayerUI$Lazy.js');
 /**
  * @depends nhn.husky.SE2M_LineHeightWithLayerUI
  * this.oApp.registerLazyMessage(["SE2M_TOGGLE_LINEHEIGHT_LAYER"], ["hp_SE2M_LineHeightWithLayerUI$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_LineHeightWithLayerUI, {
+HuskyCore.mixin(SE2M_LineHeightWithLayerUI, {
   //@lazyload_js SE2M_TOGGLE_LINEHEIGHT_LAYER[
   _assignHTMLObjects: function (elAppContainer) {
     //this.elLineHeightSelect = jindo.$$.getSingle("SELECT.husky_seditor_ui_lineHeight_select", elAppContainer);

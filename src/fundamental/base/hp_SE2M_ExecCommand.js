@@ -6,7 +6,7 @@ import { SE2M_Utils } from '../../util';
  * @fileOverview This file contains Husky plugin that takes care of the basic editor commands
  * @name hp_SE_ExecCommand.js
  */
-nhn.husky.SE2M_ExecCommand = jindo.$Class({
+export const SE2M_ExecCommand = jindo.$Class({
   name: 'SE2M_ExecCommand',
   oEditingArea: null,
   oUndoOption: null,

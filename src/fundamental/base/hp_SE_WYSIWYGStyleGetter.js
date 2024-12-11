@@ -1,6 +1,6 @@
 import { CurrentSelection } from '../../husky_framework';
 
-nhn.husky.SE_WYSIWYGStyleGetter = jindo.$Class({
+export const SE_WYSIWYGStyleGetter = jindo.$Class({
   name: 'SE_WYSIWYGStyleGetter',
 
   hKeyUp: null,

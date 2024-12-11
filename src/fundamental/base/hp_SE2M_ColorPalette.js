@@ -5,7 +5,7 @@ import { SE2M_Configuration } from '../../config';
  * @fileOverview This file contains Husky plugin that takes care of the operations directly related to the color palette
  * @name hp_SE2M_ColorPalette.js
  */
-nhn.husky.SE2M_ColorPalette = jindo
+export const SE2M_ColorPalette = jindo
   .$Class({
     name: 'SE2M_ColorPalette',
     elAppContainer: null,

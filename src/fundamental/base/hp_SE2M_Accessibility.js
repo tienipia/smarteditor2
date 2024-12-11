@@ -5,7 +5,7 @@ import { SE2M_Configuration } from '../../config';
  * @fileOverview This file contains Husky plugin that takes care of Accessibility about SmartEditor2.
  * @name hp_SE2M_Accessibility.js
  */
-nhn.husky.SE2M_Accessibility = jindo.$Class({
+export const SE2M_Accessibility = jindo.$Class({
   name: 'SE2M_Accessibility',
 
   /*

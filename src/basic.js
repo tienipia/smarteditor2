@@ -1,5 +1,19 @@
 import { SE2M_Toolbar } from './common/base/hp_SE2M_Toolbar';
 import { SE2B_CSSLoader, SE_OuterIFrameControl, SE_ToolbarToggler } from './extra';
+import {
+  SE2M_Accessibility,
+  SE2M_BGColor,
+  SE2M_ColorPalette,
+  SE2M_ExecCommand,
+  SE2M_FontColor,
+  SE2M_FontNameWithLayerUI,
+  SE2M_FontSizeWithLayerUI,
+  SE2M_Hyperlink,
+  SE2M_LineHeightWithLayerUI,
+  SE2M_LineStyler,
+  SE_WYSIWYGStyleGetter,
+  SE_WYSIWYGStyler
+} from './fundamental/base';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { SE2M_QuickEditor_Common } from './quick_editor/hp_SE2M_QuickEditor_Common';
@@ -82,29 +96,29 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   oEditor.registerPlugin(new HuskyRangeManager(oWYSIWYGIFrame));
   oEditor.registerPlugin(new Utils());
   oEditor.registerPlugin(new SE2M_UtilPlugin());
-  oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyler());
+  oEditor.registerPlugin(new SE_WYSIWYGStyler());
   oEditor.registerPlugin(new SE2M_Toolbar(elAppContainer));
 
   oEditor.registerPlugin(new Hotkey()); // 단축키
   oEditor.registerPlugin(new nhn.husky.SE_EditingAreaVerticalResizer(elAppContainer, htConversionMode)); // 편집영역 리사이즈
   oEditor.registerPlugin(new DialogLayerManager());
   oEditor.registerPlugin(new ActiveLayerManager());
-  oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyleGetter()); // 커서 위치 스타일 정보 가져오기
+  oEditor.registerPlugin(new SE_WYSIWYGStyleGetter()); // 커서 위치 스타일 정보 가져오기
 
   oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey('P')); // 엔터 시 처리, 현재는 P로 처리
 
-  oEditor.registerPlugin(new nhn.husky.SE2M_ColorPalette(elAppContainer)); // 색상 팔레트
-  oEditor.registerPlugin(new nhn.husky.SE2M_FontColor(elAppContainer)); // 글자색
-  oEditor.registerPlugin(new nhn.husky.SE2M_BGColor(elAppContainer)); // 글자배경색
-  oEditor.registerPlugin(new nhn.husky.SE2M_FontNameWithLayerUI(elAppContainer, aAdditionalFontList)); // 글꼴종류
-  oEditor.registerPlugin(new nhn.husky.SE2M_FontSizeWithLayerUI(elAppContainer)); // 글꼴크기
+  oEditor.registerPlugin(new SE2M_ColorPalette(elAppContainer)); // 색상 팔레트
+  oEditor.registerPlugin(new SE2M_FontColor(elAppContainer)); // 글자색
+  oEditor.registerPlugin(new SE2M_BGColor(elAppContainer)); // 글자배경색
+  oEditor.registerPlugin(new SE2M_FontNameWithLayerUI(elAppContainer, aAdditionalFontList)); // 글꼴종류
+  oEditor.registerPlugin(new SE2M_FontSizeWithLayerUI(elAppContainer)); // 글꼴크기
 
-  oEditor.registerPlugin(new nhn.husky.SE2M_LineStyler());
-  oEditor.registerPlugin(new nhn.husky.SE2M_ExecCommand(oWYSIWYGIFrame));
-  oEditor.registerPlugin(new nhn.husky.SE2M_LineHeightWithLayerUI(elAppContainer)); // 줄간격
+  oEditor.registerPlugin(new SE2M_LineStyler());
+  oEditor.registerPlugin(new SE2M_ExecCommand(oWYSIWYGIFrame));
+  oEditor.registerPlugin(new SE2M_LineHeightWithLayerUI(elAppContainer)); // 줄간격
 
   oEditor.registerPlugin(new nhn.husky.SE2M_Quote(elAppContainer)); // 인용구
-  oEditor.registerPlugin(new nhn.husky.SE2M_Hyperlink(elAppContainer)); // 링크
+  oEditor.registerPlugin(new SE2M_Hyperlink(elAppContainer)); // 링크
   oEditor.registerPlugin(new nhn.husky.SE2M_SCharacter(elAppContainer)); // 특수문자
   oEditor.registerPlugin(new nhn.husky.SE2M_FindReplacePlugin(elAppContainer)); // 찾기/바꾸기
   oEditor.registerPlugin(new nhn.husky.SE2M_TableCreator(elAppContainer)); // 테이블 생성
@@ -123,7 +137,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   }
 
   oEditor.registerPlugin(new SE_ToolbarToggler(elAppContainer, htParams.bUseToolbar));
-  oEditor.registerPlugin(new nhn.husky.SE2M_Accessibility(elAppContainer, htParams.I18N_LOCALE)); // 에디터내의 웹접근성 관련 기능모음 플러그인
+  oEditor.registerPlugin(new SE2M_Accessibility(elAppContainer, htParams.I18N_LOCALE)); // 에디터내의 웹접근성 관련 기능모음 플러그인
 
   oEditor.registerPlugin(new SE_UndoRedo()); // Undo/Redo
 

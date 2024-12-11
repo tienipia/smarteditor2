@@ -1,11 +1,12 @@
 import { HuskyCore } from '../../husky_framework';
+import { SE2M_BGColor } from './hp_SE2M_BGColor';
 
 HuskyCore.addLoadedFile('hp_SE2M_BGColor$Lazy.js');
 /**
  * @depends nhn.husky.SE2M_BGColor
  * this.oApp.registerLazyMessage(["APPLY_LAST_USED_BGCOLOR", "TOGGLE_BGCOLOR_LAYER"], ["hp_SE2M_BGColor$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_BGColor, {
+HuskyCore.mixin(SE2M_BGColor, {
   //@lazyload_js APPLY_LAST_USED_BGCOLOR,TOGGLE_BGCOLOR_LAYER[
   $ON_TOGGLE_BGCOLOR_LAYER: function () {
     this.oApp.exec('TOGGLE_TOOLBAR_ACTIVE_LAYER', [

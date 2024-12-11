@@ -1,12 +1,13 @@
 import { HuskyCore } from '../../husky_framework';
 import { SE2M_Utils } from '../../util';
+import { SE2M_Hyperlink } from './hp_SE2M_Hyperlink';
 
 HuskyCore.addLoadedFile('hp_SE2M_Hyperlink$Lazy.js');
 /**
  * @depends nhn.husky.SE2M_Hyperlink
  * this.oApp.registerLazyMessage(["TOGGLE_HYPERLINK_LAYER", "APPLY_HYPERLINK"], ["hp_SE2M_Hyperlink$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_Hyperlink, {
+HuskyCore.mixin(SE2M_Hyperlink, {
   //@lazyload_js TOGGLE_HYPERLINK_LAYER,APPLY_HYPERLINK[
   $ON_TOGGLE_HYPERLINK_LAYER: function () {
     if (!this.bLayerShown) {
