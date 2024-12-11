@@ -1,4 +1,6 @@
 export * from './hp_SE2B_CSSLoader';
+export * from './hp_SE_OuterIFrameControl';
+export * from './hp_SE_ToolbarToggler';
 
 window.oMessageMap = {
   'SE_EditingAreaManager.onExit': '내용이 변경되었습니다.',

@@ -1,6 +1,5 @@
 import { createSEditor2 } from '../basic';
 import './base';
-import './extra';
 import './lazy';
 
 if (window.frameElement) {

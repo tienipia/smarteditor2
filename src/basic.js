@@ -1,4 +1,4 @@
-import { SE2B_CSSLoader } from './extra';
+import { SE2B_CSSLoader, SE_OuterIFrameControl, SE_ToolbarToggler } from './extra';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
 import { Hotkey } from './shortcut/hp_Hotkey';
@@ -109,10 +109,10 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
 
   oEditor.registerPlugin(new SE2B_CSSLoader()); // CSS lazy load
   if (window.frameElement) {
-    oEditor.registerPlugin(new nhn.husky.SE_OuterIFrameControl(elAppContainer, 100));
+    oEditor.registerPlugin(new SE_OuterIFrameControl(elAppContainer, 100));
   }
 
-  oEditor.registerPlugin(new nhn.husky.SE_ToolbarToggler(elAppContainer, htParams.bUseToolbar));
+  oEditor.registerPlugin(new SE_ToolbarToggler(elAppContainer, htParams.bUseToolbar));
   oEditor.registerPlugin(new nhn.husky.SE2M_Accessibility(elAppContainer, htParams.I18N_LOCALE)); // 에디터내의 웹접근성 관련 기능모음 플러그인
 
   oEditor.registerPlugin(new SE_UndoRedo()); // Undo/Redo
