@@ -1,8 +1,6 @@
 import { createSEditor2 } from '../basic';
 import './base';
 import './extra';
-import './husky-range';
-// full 버전에서 사용하지 않는 모듈
 import './lazy';
 
 if (window.frameElement) {

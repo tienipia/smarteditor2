@@ -1,25 +1,9 @@
-/*
-Copyright (C) NAVER corp.  
+export const START_TO_START = 0;
+export const START_TO_END = 1;
+export const END_TO_END = 2;
+export const END_TO_START = 3;
 
-This library is free software; you can redistribute it and/or  
-modify it under the terms of the GNU Lesser General Public  
-License as published by the Free Software Foundation; either  
-version 2.1 of the License, or (at your option) any later version.  
-
-This library is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
-Lesser General Public License for more details.  
-
-You should have received a copy of the GNU Lesser General Public  
-License along with this library; if not, write to the Free Software  
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  
-*/
-if (typeof window.nhn == 'undefined') {
-  window.nhn = {};
-}
-
-nhn.CurrentSelection_IE = function () {
+export const CurrentSelection_IE = function () {
   this.getCommonAncestorContainer = function () {
     try {
       this._oSelection = this._document.selection;
@@ -40,7 +24,7 @@ nhn.CurrentSelection_IE = function () {
   };
 };
 
-nhn.CurrentSelection_FF = function () {
+export const CurrentSelection_FF = function () {
   this.getCommonAncestorContainer = function () {
     return this._getSelection().commonAncestorContainer;
   };
@@ -63,13 +47,13 @@ nhn.CurrentSelection_FF = function () {
   };
 };
 
-nhn.CurrentSelection = new (jindo.$Class({
+export const CurrentSelection = new (jindo.$Class({
   $init: function () {
     var oAgentInfo = jindo.$Agent().navigator();
     if (oAgentInfo.ie && document.selection) {
-      nhn.CurrentSelection_IE.apply(this);
+      CurrentSelection_IE.apply(this);
     } else {
-      nhn.CurrentSelection_FF.apply(this);
+      CurrentSelection_FF.apply(this);
     }
   },
 
@@ -83,7 +67,7 @@ nhn.CurrentSelection = new (jindo.$Class({
  * @fileOverview This file contains a cross-browser implementation of W3C's DOM Range
  * @name W3CDOMRange.js
  */
-nhn.W3CDOMRange = jindo.$Class({
+const W3CDOMRange = jindo.$Class({
   $init: function (win) {
     this.reset(win);
   },
@@ -99,7 +83,7 @@ nhn.W3CDOMRange = jindo.$Class({
     this.startContainer = this._document.body;
     this.startOffset = 0;
 
-    this.oBrowserSelection = new nhn.BrowserSelection(this._window);
+    this.oBrowserSelection = new BrowserSelection(this._window);
     this.selectionLoaded = this.oBrowserSelection.selectionLoaded;
   },
 
@@ -137,13 +121,13 @@ nhn.W3CDOMRange = jindo.$Class({
     });
 
     if (oClonedContainers.oStartContainer && oClonedContainers.oStartContainer.previousSibling) {
-      nhn.DOMFix.parentNode(oClonedContainers.oStartContainer).removeChild(
+      DOMFix.parentNode(oClonedContainers.oStartContainer).removeChild(
         oClonedContainers.oStartContainer.previousSibling
       );
     }
 
     if (oClonedContainers.oEndContainer && oClonedContainers.oEndContainer.nextSibling) {
-      nhn.DOMFix.parentNode(oClonedContainers.oEndContainer).removeChild(oClonedContainers.oEndContainer.nextSibling);
+      DOMFix.parentNode(oClonedContainers.oEndContainer).removeChild(oClonedContainers.oEndContainer.nextSibling);
     }
 
     return oClonedContents;
@@ -172,7 +156,7 @@ nhn.W3CDOMRange = jindo.$Class({
         oClonedEndContainer = oCurNodeCloneWithChildren;
       }
 
-      while (iChildIdx >= 0 && nhn.DOMFix.parentNode(aAllNodes[iChildIdx]) == aAllNodes[iCurIdx]) {
+      while (iChildIdx >= 0 && DOMFix.parentNode(aAllNodes[iChildIdx]) == aAllNodes[iCurIdx]) {
         iChildIdx = this._recurConstructClonedTree(aAllNodes, iChildIdx, oCurNodeCloneWithChildren);
       }
 
@@ -182,14 +166,14 @@ nhn.W3CDOMRange = jindo.$Class({
       return iChildIdx;
     };
     this._recurConstructClonedTree = _recurConstructClonedTree;
-    aNodes[aNodes.length] = nhn.DOMFix.parentNode(aNodes[aNodes.length - 1]);
+    aNodes[aNodes.length] = DOMFix.parentNode(aNodes[aNodes.length - 1]);
     this._recurConstructClonedTree(aNodes, aNodes.length - 1, oClonedParentNode);
 
     return { oStartContainer: oClonedStartContainer, oEndContainer: oClonedEndContainer };
   },
 
   cloneRange: function () {
-    return this._copyRange(new nhn.W3CDOMRange(this._window));
+    return this._copyRange(new W3CDOMRange(this._window));
   },
 
   _copyRange: function (oClonedRange) {
@@ -218,28 +202,28 @@ nhn.W3CDOMRange = jindo.$Class({
 
   compareBoundaryPoints: function (how, sourceRange) {
     switch (how) {
-      case nhn.W3CDOMRange.START_TO_START:
+      case START_TO_START:
         return this._compareEndPoint(
           this.startContainer,
           this.startOffset,
           sourceRange.startContainer,
           sourceRange.startOffset
         );
-      case nhn.W3CDOMRange.START_TO_END:
+      case START_TO_END:
         return this._compareEndPoint(
           this.endContainer,
           this.endOffset,
           sourceRange.startContainer,
           sourceRange.startOffset
         );
-      case nhn.W3CDOMRange.END_TO_END:
+      case END_TO_END:
         return this._compareEndPoint(
           this.endContainer,
           this.endOffset,
           sourceRange.endContainer,
           sourceRange.endOffset
         );
-      case nhn.W3CDOMRange.END_TO_START:
+      case END_TO_START:
         return this._compareEndPoint(
           this.startContainer,
           this.startOffset,
@@ -257,7 +241,7 @@ nhn.W3CDOMRange = jindo.$Class({
       if (oNode.tagName == 'BODY') {
         return oNode;
       }
-      oNode = nhn.DOMFix.parentNode(oNode);
+      oNode = DOMFix.parentNode(oNode);
     }
     return null;
   },
@@ -301,7 +285,7 @@ nhn.W3CDOMRange = jindo.$Class({
 		var oNodeA = oContainerA;
 		var oTmpNode = null;
 		if(oNodeA != oCommonAncestor){
-			while((oTmpNode = nhn.DOMFix.parentNode(oNodeA)) != oCommonAncestor){oNodeA = oTmpNode;}
+			while((oTmpNode = DOMFix.parentNode(oNodeA)) != oCommonAncestor){oNodeA = oTmpNode;}
 			
 			iIdxA = this._getPosIdx(oNodeA)+0.5;
 		}else{
@@ -311,7 +295,7 @@ nhn.W3CDOMRange = jindo.$Class({
 		// container node B in common ancestor container
 		var oNodeB = oContainerB;
 		if(oNodeB != oCommonAncestor){
-			while((oTmpNode = nhn.DOMFix.parentNode(oNodeB)) != oCommonAncestor){oNodeB = oTmpNode;}
+			while((oTmpNode = DOMFix.parentNode(oNodeB)) != oCommonAncestor){oNodeB = oTmpNode;}
 			
 			iIdxB = this._getPosIdx(oNodeB)+0.5;
 		}else{
@@ -333,10 +317,10 @@ nhn.W3CDOMRange = jindo.$Class({
         if (oNode1 == oComparingNode) {
           return oNode1;
         }
-        oComparingNode = nhn.DOMFix.parentNode(oComparingNode);
+        oComparingNode = DOMFix.parentNode(oComparingNode);
       }
       oComparingNode = oNode2;
-      oNode1 = nhn.DOMFix.parentNode(oNode1);
+      oNode1 = DOMFix.parentNode(oNode1);
     }
 
     return this._document.body;
@@ -363,7 +347,7 @@ nhn.W3CDOMRange = jindo.$Class({
     var oNewStartContainer,
       iNewOffset = -1;
     if (!oPrevNode) {
-      oNewStartContainer = nhn.DOMFix.parentNode(aNodes[0]);
+      oNewStartContainer = DOMFix.parentNode(aNodes[0]);
       iNewOffset = 0;
     }
 
@@ -373,7 +357,7 @@ nhn.W3CDOMRange = jindo.$Class({
       if (!oNode.firstChild || this._isAllChildBlankText(oNode)) {
         if (oNewStartContainer == oNode) {
           iNewOffset = this._getPosIdx(oNewStartContainer);
-          oNewStartContainer = nhn.DOMFix.parentNode(oNode);
+          oNewStartContainer = DOMFix.parentNode(oNode);
         }
         oNode.parentNode.removeChild(oNode);
       } else {
@@ -384,7 +368,7 @@ nhn.W3CDOMRange = jindo.$Class({
         // -> <span>[]B</span>
         if (oNewStartContainer == oNode && iNewOffset === 0) {
           iNewOffset = this._getPosIdx(oNewStartContainer);
-          oNewStartContainer = nhn.DOMFix.parentNode(oNode);
+          oNewStartContainer = DOMFix.parentNode(oNode);
         }
       }
     }
@@ -414,7 +398,7 @@ nhn.W3CDOMRange = jindo.$Class({
     var oParentContainer;
 
     if (this.startContainer.nodeType == '3') {
-      oParentContainer = nhn.DOMFix.parentNode(this.startContainer);
+      oParentContainer = DOMFix.parentNode(this.startContainer);
       if (this.startContainer.nodeValue.length <= this.startOffset) {
         oFirstNode = this.startContainer.nextSibling;
       } else {
@@ -422,10 +406,10 @@ nhn.W3CDOMRange = jindo.$Class({
       }
     } else {
       oParentContainer = this.startContainer;
-      oFirstNode = nhn.DOMFix.childNodes(this.startContainer)[this.startOffset];
+      oFirstNode = DOMFix.childNodes(this.startContainer)[this.startOffset];
     }
 
-    if (!oFirstNode || !nhn.DOMFix.parentNode(oFirstNode)) {
+    if (!oFirstNode || !DOMFix.parentNode(oFirstNode)) {
       oFirstNode = null;
     }
 
@@ -451,7 +435,7 @@ nhn.W3CDOMRange = jindo.$Class({
     this.reset(this._window);
 
     this.setStart(refNode, 0, true);
-    this.setEnd(refNode, nhn.DOMFix.childNodes(refNode).length);
+    this.setEnd(refNode, DOMFix.childNodes(refNode).length);
   },
 
   _endsNodeValidation: function (oNode, iOffset) {
@@ -464,8 +448,8 @@ nhn.W3CDOMRange = jindo.$Class({
         iOffset = oNode.nodeValue.length;
       }
     } else {
-      if (iOffset > nhn.DOMFix.childNodes(oNode).length) {
-        iOffset = nhn.DOMFix.childNodes(oNode).length;
+      if (iOffset > DOMFix.childNodes(oNode).length) {
+        iOffset = DOMFix.childNodes(oNode).length;
       }
     }
 
@@ -498,10 +482,10 @@ nhn.W3CDOMRange = jindo.$Class({
     }
 
     if (refNode.tagName == 'BODY') {
-      this.setEnd(refNode, nhn.DOMFix.childNodes(refNode).length, true, bNoUpdate);
+      this.setEnd(refNode, DOMFix.childNodes(refNode).length, true, bNoUpdate);
       return;
     }
-    this.setEnd(nhn.DOMFix.parentNode(refNode), this._getPosIdx(refNode) + 1, true, bNoUpdate);
+    this.setEnd(DOMFix.parentNode(refNode), this._getPosIdx(refNode) + 1, true, bNoUpdate);
   },
 
   setEndBefore: function (refNode, bNoUpdate) {
@@ -514,7 +498,7 @@ nhn.W3CDOMRange = jindo.$Class({
       return;
     }
 
-    this.setEnd(nhn.DOMFix.parentNode(refNode), this._getPosIdx(refNode), true, bNoUpdate);
+    this.setEnd(DOMFix.parentNode(refNode), this._getPosIdx(refNode), true, bNoUpdate);
   },
 
   setStart: function (refNode, offset, bSafe, bNoUpdate) {
@@ -543,11 +527,11 @@ nhn.W3CDOMRange = jindo.$Class({
     }
 
     if (refNode.tagName == 'BODY') {
-      this.setStart(refNode, nhn.DOMFix.childNodes(refNode).length, true, bNoUpdate);
+      this.setStart(refNode, DOMFix.childNodes(refNode).length, true, bNoUpdate);
       return;
     }
 
-    this.setStart(nhn.DOMFix.parentNode(refNode), this._getPosIdx(refNode) + 1, true, bNoUpdate);
+    this.setStart(DOMFix.parentNode(refNode), this._getPosIdx(refNode) + 1, true, bNoUpdate);
   },
 
   setStartBefore: function (refNode, bNoUpdate) {
@@ -559,7 +543,7 @@ nhn.W3CDOMRange = jindo.$Class({
       this.setStart(refNode, 0, true, bNoUpdate);
       return;
     }
-    this.setStart(nhn.DOMFix.parentNode(refNode), this._getPosIdx(refNode), true, bNoUpdate);
+    this.setStart(DOMFix.parentNode(refNode), this._getPosIdx(refNode), true, bNoUpdate);
   },
 
   surroundContents: function (newParent) {
@@ -791,8 +775,8 @@ nhn.W3CDOMRange = jindo.$Class({
         oStartNode = oStartContainer;
       }
     } else {
-      if (iStartOffset < nhn.DOMFix.childNodes(oStartContainer).length) {
-        oStartNode = nhn.DOMFix.childNodes(oStartContainer)[iStartOffset];
+      if (iStartOffset < DOMFix.childNodes(oStartContainer).length) {
+        oStartNode = DOMFix.childNodes(oStartContainer)[iStartOffset];
       } else {
         oStartNode = this._getNextNode(oStartContainer);
         if (oStartNode.tagName == 'BODY') {
@@ -815,7 +799,7 @@ nhn.W3CDOMRange = jindo.$Class({
     } else if (oEndContainer.nodeType == 3) {
       oEndNode = oEndContainer;
     } else {
-      oEndNode = nhn.DOMFix.childNodes(oEndContainer)[iEndOffset - 1];
+      oEndNode = DOMFix.childNodes(oEndContainer)[iEndOffset - 1];
     }
 
     return oEndNode;
@@ -830,7 +814,7 @@ nhn.W3CDOMRange = jindo.$Class({
       return oNode.nextSibling;
     }
 
-    return this._getNextNode(nhn.DOMFix.parentNode(oNode));
+    return this._getNextNode(DOMFix.parentNode(oNode));
   },
 
   _getPrevNode: function (oNode) {
@@ -842,7 +826,7 @@ nhn.W3CDOMRange = jindo.$Class({
       return oNode.previousSibling;
     }
 
-    return this._getPrevNode(nhn.DOMFix.parentNode(oNode));
+    return this._getPrevNode(DOMFix.parentNode(oNode));
   },
 
   // includes partially selected
@@ -878,7 +862,7 @@ nhn.W3CDOMRange = jindo.$Class({
     var oNextToChk = oNode.nextSibling;
 
     while (!oNextToChk) {
-      if (!(oNode = nhn.DOMFix.parentNode(oNode))) {
+      if (!(oNode = DOMFix.parentNode(oNode))) {
         return false;
       }
 
@@ -924,16 +908,11 @@ nhn.W3CDOMRange = jindo.$Class({
   }
 });
 
-nhn.W3CDOMRange.START_TO_START = 0;
-nhn.W3CDOMRange.START_TO_END = 1;
-nhn.W3CDOMRange.END_TO_END = 2;
-nhn.W3CDOMRange.END_TO_START = 3;
-
 /**
  * @fileOverview This file contains a cross-browser function that implements all of the W3C's DOM Range specification and some more
  * @name HuskyRange.js
  */
-nhn.HuskyRange = jindo
+export const HuskyRange = jindo
   .$Class({
     _rxCursorHolder: /^(?:\uFEFF|\u00A0|\u200B|<br>)$/i,
     _rxTextAlign: /text-align:[^"';]*;?/i,
@@ -1014,10 +993,10 @@ nhn.HuskyRange = jindo
         }
         return this.startContainer;
       } else {
-        if (this.startOffset >= nhn.DOMFix.childNodes(this.startContainer).length) {
+        if (this.startOffset >= DOMFix.childNodes(this.startContainer).length) {
           return this._getNextNode(this.startContainer);
         }
-        return nhn.DOMFix.childNodes(this.startContainer)[this.startOffset];
+        return DOMFix.childNodes(this.startContainer)[this.startOffset];
       }
     },
 
@@ -1035,7 +1014,7 @@ nhn.HuskyRange = jindo
         if (this.endOffset === 0) {
           return this._getPrevNode(this.endContainer);
         }
-        return nhn.DOMFix.childNodes(this.endContainer)[this.endOffset - 1];
+        return DOMFix.childNodes(this.endContainer)[this.endOffset - 1];
       }
     },
 
@@ -1052,16 +1031,16 @@ nhn.HuskyRange = jindo
 
       var oBeforeRange, oAfterRange, oResult;
 
-      if (this.startOffset >= nhn.DOMFix.childNodes(this.startContainer).length) {
+      if (this.startOffset >= DOMFix.childNodes(this.startContainer).length) {
         oAfterRange = this._getNextNode(this.startContainer);
       } else {
-        oAfterRange = nhn.DOMFix.childNodes(this.startContainer)[this.startOffset];
+        oAfterRange = DOMFix.childNodes(this.startContainer)[this.startOffset];
       }
 
       if (this.endOffset === 0) {
         oBeforeRange = this._getPrevNode(this.endContainer);
       } else {
-        oBeforeRange = nhn.DOMFix.childNodes(this.endContainer)[this.endOffset - 1];
+        oBeforeRange = DOMFix.childNodes(this.endContainer)[this.endOffset - 1];
       }
 
       if (bBefore) {
@@ -1084,7 +1063,7 @@ nhn.HuskyRange = jindo
 
       while (elNode && elNode.nodeType == 1) {
         sXPath = '/' + elNode.tagName + '[' + this._getPosIdx4XPath(elNode) + ']' + sXPath;
-        elNode = nhn.DOMFix.parentNode(elNode);
+        elNode = DOMFix.parentNode(elNode);
       }
 
       return sXPath;
@@ -1112,7 +1091,7 @@ nhn.HuskyRange = jindo
         var sTagName = RegExp.$1;
         var nIdx = RegExp.$2;
 
-        var aAllNodes = nhn.DOMFix.childNodes(elNode);
+        var aAllNodes = DOMFix.childNodes(elNode);
         var aNodes = [];
         var nLength = aAllNodes.length;
         var nCount = 0;
@@ -1140,7 +1119,7 @@ nhn.HuskyRange = jindo
       var elContainer = this._evaluateXPath(sXPath, this._document);
 
       if (nTextNodeIdx > -1 && elContainer) {
-        var aChildNodes = nhn.DOMFix.childNodes(elContainer);
+        var aChildNodes = DOMFix.childNodes(elContainer);
         var elNode = null;
 
         var nIdx = nTextNodeIdx;
@@ -1151,7 +1130,7 @@ nhn.HuskyRange = jindo
           nIdx++;
         }
 
-        elContainer = nhn.DOMFix.childNodes(elContainer)[nIdx];
+        elContainer = DOMFix.childNodes(elContainer)[nIdx];
         nOffset = nOffsetLeft;
       }
 
@@ -1170,7 +1149,7 @@ nhn.HuskyRange = jindo
       if (elNode1.nodeType == 3) {
         htEndPt1 = this._getFixedStartTextNode();
         nTextNodeIdx1 = this._getPosIdx(htEndPt1.elContainer);
-        elNode1 = nhn.DOMFix.parentNode(elNode1);
+        elNode1 = DOMFix.parentNode(elNode1);
       }
       var sXPathNode1 = this._getXPath(elNode1);
       var oBookmark1 = { sXPath: sXPathNode1, nTextNodeIdx: nTextNodeIdx1, nOffset: htEndPt1.nOffset };
@@ -1185,7 +1164,7 @@ nhn.HuskyRange = jindo
         if (elNode2.nodeType == 3) {
           htEndPt2 = this._getFixedEndTextNode();
           nTextNodeIdx2 = this._getPosIdx(htEndPt2.elContainer);
-          elNode2 = nhn.DOMFix.parentNode(elNode2);
+          elNode2 = DOMFix.parentNode(elNode2);
         }
         var sXPathNode2 = this._getXPath(elNode2);
         oBookmark2 = { sXPath: sXPathNode2, nTextNodeIdx: nTextNodeIdx2, nOffset: htEndPt2.nOffset };
@@ -1316,7 +1295,7 @@ nhn.HuskyRange = jindo
     },
 
     cloneRange: function () {
-      return this._copyRange(new nhn.HuskyRange(this._window));
+      return this._copyRange(new HuskyRange(this._window));
     },
 
     moveToBookmark: function (vBookmark) {
@@ -1360,8 +1339,8 @@ nhn.HuskyRange = jindo
 		var oStartMarker = this._document.getElementById(this.HUSKY_BOOMARK_START_ID_PREFIX+sBookmarkID);
 		var oEndMarker = this._document.getElementById(this.HUSKY_BOOMARK_END_ID_PREFIX+sBookmarkID);
 
-		if(oStartMarker) nhn.DOMFix.parentNode(oStartMarker).removeChild(oStartMarker);
-		if(oEndMarker) nhn.DOMFix.parentNode(oEndMarker).removeChild(oEndMarker);
+		if(oStartMarker) DOMFix.parentNode(oStartMarker).removeChild(oStartMarker);
+		if(oEndMarker) DOMFix.parentNode(oEndMarker).removeChild(oEndMarker);
 	*/
       this._removeAll(this.HUSKY_BOOMARK_START_ID_PREFIX + sBookmarkID);
       this._removeAll(this.HUSKY_BOOMARK_END_ID_PREFIX + sBookmarkID);
@@ -1451,7 +1430,7 @@ nhn.HuskyRange = jindo
     },
 
     isNodeInRange: function (oNode, bIncludePartlySelected, bContentOnly) {
-      var oTmpRange = new nhn.HuskyRange(this._window);
+      var oTmpRange = new HuskyRange(this._window);
 
       if (bContentOnly && oNode.firstChild) {
         oTmpRange.setStartBefore(oNode.firstChild);
@@ -1651,7 +1630,7 @@ nhn.HuskyRange = jindo
     },
 
     toString: function () {
-      this.toString = nhn.W3CDOMRange.prototype.toString;
+      this.toString = W3CDOMRange.prototype.toString;
       return this.toString();
     },
 
@@ -1665,7 +1644,7 @@ nhn.HuskyRange = jindo
     findAncestorByTagName: function (sTagName) {
       var oNode = this.commonAncestorContainer;
       while (oNode && oNode.tagName != sTagName) {
-        oNode = nhn.DOMFix.parentNode(oNode);
+        oNode = DOMFix.parentNode(oNode);
       }
 
       return oNode;
@@ -1698,7 +1677,7 @@ nhn.HuskyRange = jindo
      * 관련 BTS [SMARTEDITORSUS-26]
      * @param {Node} 	oNode	취소선/밑줄을 확인할 노드
      * @param {String}	sValue 	textDecoration 정보
-     * @see nhn.HuskyRange#_checkTextDecoration
+     * @see HuskyRange#_checkTextDecoration
      */
     _hasTextDecoration: function (oNode, sValue) {
       if (!oNode || !oNode.style) {
@@ -1727,7 +1706,7 @@ nhn.HuskyRange = jindo
      * [FF 외] U/STRIKE 태그를 추가한다
      * @param {Node} 	oNode	취소선/밑줄을 적용할 노드
      * @param {String}	sValue 	textDecoration 정보
-     * @see nhn.HuskyRange#_checkTextDecoration
+     * @see HuskyRange#_checkTextDecoration
      */
     _setTextDecoration: function (oNode, sValue) {
       if (jindo.$Agent().navigator().firefox) {
@@ -1771,12 +1750,12 @@ nhn.HuskyRange = jindo
         oChildNode = oChildNode.nextSibling;
       }
 
-      oParentNode = nhn.DOMFix.parentNode(oNode);
+      oParentNode = DOMFix.parentNode(oNode);
 
       /* check parent */
       while (oParentNode && oParentNode.tagName !== 'BODY') {
         if (oParentNode.nodeType !== 1) {
-          oParentNode = nhn.DOMFix.parentNode(oParentNode);
+          oParentNode = DOMFix.parentNode(oParentNode);
           continue;
         }
 
@@ -1794,7 +1773,7 @@ nhn.HuskyRange = jindo
           return;
         }
 
-        oParentNode = nhn.DOMFix.parentNode(oParentNode);
+        oParentNode = DOMFix.parentNode(oParentNode);
       }
     },
 
@@ -1950,7 +1929,7 @@ nhn.HuskyRange = jindo
           continue;
         }
 
-        var oParentNode = nhn.DOMFix.parentNode(oNode);
+        var oParentNode = DOMFix.parentNode(oNode);
 
         // 부모 노드가 SPAN 인 경우에는 새로운 SPAN 을 생성하지 않고 SPAN 을 리턴 배열에 추가함
         if (oParentNode.tagName == 'SPAN') {
@@ -2124,7 +2103,7 @@ nhn.HuskyRange = jindo
         if (frontEndFinal) {
           return;
         }
-        getLineStart(nhn.DOMFix.parentNode(node));
+        getLineStart(DOMFix.parentNode(node));
       }
 
       // horizontal(sibling) search
@@ -2205,7 +2184,7 @@ nhn.HuskyRange = jindo
           return;
         }
 
-        getLineEnd(nhn.DOMFix.parentNode(node));
+        getLineEnd(DOMFix.parentNode(node));
       }
 
       // horizontal(sibling) search
@@ -2278,13 +2257,13 @@ nhn.HuskyRange = jindo
         // or
         // if the end node is positioned before the range's starting point
         var iRelativeStartPos = this._compareEndPoint(
-          nhn.DOMFix.parentNode(oStartNode),
+          DOMFix.parentNode(oStartNode),
           this._getPosIdx(oStartNode),
           this.endContainer,
           this.endOffset
         );
         var iRelativeEndPos = this._compareEndPoint(
-          nhn.DOMFix.parentNode(oEndNode),
+          DOMFix.parentNode(oEndNode),
           this._getPosIdx(oEndNode) + 1,
           this.startContainer,
           this.startOffset
@@ -2344,13 +2323,13 @@ nhn.HuskyRange = jindo
       }
     }
   })
-  .extend(nhn.W3CDOMRange);
+  .extend(W3CDOMRange);
 
 /**
  * @fileOverview This file contains cross-browser selection function
  * @name BrowserSelection.js
  */
-nhn.BrowserSelection = function (win) {
+export const BrowserSelection = function (win) {
   this.init = function (win) {
     this._window = win || window;
     this._document = this._window.document;
@@ -2361,15 +2340,15 @@ nhn.BrowserSelection = function (win) {
   // [SMARTEDITORSUS-888] IE9 이후로 document.createRange 를 지원
   /*	var oAgentInfo = jindo.$Agent().navigator();
 	if(oAgentInfo.ie){
-		nhn.BrowserSelectionImpl_IE.apply(this);
+		BrowserSelectionImpl_IE.apply(this);
 	}else{
-		nhn.BrowserSelectionImpl_FF.apply(this);
+		BrowserSelectionImpl_FF.apply(this);
 	}*/
 
   if (this._document.createRange) {
-    nhn.BrowserSelectionImpl_FF.apply(this);
+    BrowserSelectionImpl_FF.apply(this);
   } else {
-    nhn.BrowserSelectionImpl_IE.apply(this);
+    BrowserSelectionImpl_IE.apply(this);
   }
 
   this.selectRange = function (oRng) {
@@ -2383,7 +2362,7 @@ nhn.BrowserSelection = function (win) {
   }
 };
 
-nhn.BrowserSelectionImpl_FF = function () {
+export const BrowserSelectionImpl_FF = function () {
   this._oSelection = this._window.getSelection();
 
   this.getRangeAt = function (iNum) {
@@ -2392,7 +2371,7 @@ nhn.BrowserSelectionImpl_FF = function () {
     try {
       var oFFRange = this._oSelection.getRangeAt(iNum);
     } catch (e) {
-      return new nhn.W3CDOMRange(this._window);
+      return new W3CDOMRange(this._window);
     }
 
     return this._FFRange2W3CRange(oFFRange);
@@ -2433,7 +2412,7 @@ nhn.BrowserSelectionImpl_FF = function () {
   };
 
   this._FFRange2W3CRange = function (oFFRange) {
-    var oW3CRange = new nhn.W3CDOMRange(this._window);
+    var oW3CRange = new W3CDOMRange(this._window);
 
     oW3CRange.setStart(oFFRange.startContainer, oFFRange.startOffset, true);
     oW3CRange.setEnd(oFFRange.endContainer, oFFRange.endOffset, true);
@@ -2450,7 +2429,7 @@ nhn.BrowserSelectionImpl_FF = function () {
   };
 };
 
-nhn.BrowserSelectionImpl_IE = function () {
+export const BrowserSelectionImpl_IE = function () {
   this._oSelection = this._document.selection;
   this.oLastRange = {
     oBrowserRange: null,
@@ -2473,7 +2452,7 @@ nhn.BrowserSelectionImpl_IE = function () {
 
     var oW3CRange, oBrowserRange, oSelectedNode;
     if (this._oSelection.type == 'Control') {
-      oW3CRange = new nhn.W3CDOMRange(this._window);
+      oW3CRange = new W3CDOMRange(this._window);
 
       oSelectedNode = this._oSelection.createRange().item(iNum);
 
@@ -2493,7 +2472,7 @@ nhn.BrowserSelectionImpl_IE = function () {
 
       // if the selction occurs in a different document, ignore
       if (!oSelectedNode || oSelectedNode.ownerDocument != this._document) {
-        oW3CRange = new nhn.W3CDOMRange(this._window);
+        oW3CRange = new W3CDOMRange(this._window);
         return oW3CRange;
       }
       oW3CRange = this._IERange2W3CRange(oBrowserRange);
@@ -2597,12 +2576,12 @@ nhn.BrowserSelectionImpl_IE = function () {
     var iNumOfLeftNodesToCount = 0;
 
     if (oW3CContainer.nodeType == 3) {
-      oNonTextNode = nhn.DOMFix.parentNode(oW3CContainer);
-      aChildNodes = nhn.DOMFix.childNodes(oNonTextNode);
+      oNonTextNode = DOMFix.parentNode(oW3CContainer);
+      aChildNodes = DOMFix.childNodes(oNonTextNode);
       iNumOfLeftNodesToCount = aChildNodes.length;
     } else {
       oNonTextNode = oW3CContainer;
-      aChildNodes = nhn.DOMFix.childNodes(oNonTextNode);
+      aChildNodes = DOMFix.childNodes(oNonTextNode);
       //iNumOfLeftNodesToCount = iW3COffset;
       iNumOfLeftNodesToCount = iW3COffset < aChildNodes.length ? iW3COffset : aChildNodes.length;
     }
@@ -2637,7 +2616,7 @@ nhn.BrowserSelectionImpl_IE = function () {
   };
 
   this._IERange2W3CRange = function (oIERange) {
-    var oW3CRange = new nhn.W3CDOMRange(this._window);
+    var oW3CRange = new W3CDOMRange(this._window);
 
     var oIEPointRange = null;
     var oPosition = null;
@@ -2672,7 +2651,7 @@ nhn.BrowserSelectionImpl_IE = function () {
     var offset = -1;
 
     var oRgTester = this._document.body.createTextRange();
-    var aChildNodes = nhn.DOMFix.childNodes(oContainer);
+    var aChildNodes = DOMFix.childNodes(oContainer);
     var oPrevNonTextNode = null;
     var pointRangeIdx = 0;
 
@@ -2738,7 +2717,7 @@ nhn.BrowserSelectionImpl_IE = function () {
   };
 };
 
-nhn.DOMFix = new (jindo.$Class({
+export const DOMFix = new (jindo.$Class({
   $init: function () {
     if (jindo.$Agent().navigator().ie || jindo.$Agent().navigator().opera) {
       this.childNodes = this._childNodes_Fix;

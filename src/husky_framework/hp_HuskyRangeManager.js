@@ -1,20 +1,5 @@
-/*
-Copyright (C) NAVER corp.  
+import { CurrentSelection, HuskyRange } from '../husky_framework';
 
-This library is free software; you can redistribute it and/or  
-modify it under the terms of the GNU Lesser General Public  
-License as published by the Free Software Foundation; either  
-version 2.1 of the License, or (at your option) any later version.  
-
-This library is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
-Lesser General Public License for more details.  
-
-You should have received a copy of the GNU Lesser General Public  
-License along with this library; if not, write to the Free Software  
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  
-*/
 //{
 /**
  * @fileOverview This file contains Husky plugin that bridges the HuskyRange function
@@ -32,7 +17,7 @@ export const HuskyRangeManager = jindo.$Class({
   $BEFORE_MSG_APP_READY: function () {
     if (this.oWindow && this.oWindow.tagName == 'IFRAME') {
       this.oWindow = this.oWindow.contentWindow;
-      nhn.CurrentSelection.setWindow(this.oWindow);
+      CurrentSelection.setWindow(this.oWindow);
     }
 
     this.oApp.exec('ADD_APP_PROPERTY', ['getSelection', jindo.$Fn(this.getSelection, this).bind()]);
@@ -44,7 +29,7 @@ export const HuskyRangeManager = jindo.$Class({
   },
 
   getEmptySelection: function (oWindow) {
-    var oHuskyRange = new nhn.HuskyRange(oWindow || this.oWindow);
+    var oHuskyRange = new HuskyRange(oWindow || this.oWindow);
     return oHuskyRange;
   },
 

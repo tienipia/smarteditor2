@@ -1,4 +1,4 @@
-import { HuskyCore } from '../../husky_framework';
+import { HuskyCore, HuskyRange, START_TO_END } from '../../husky_framework';
 
 HuskyCore.addLoadedFile('N_FindReplace.js');
 
@@ -153,7 +153,7 @@ nhn.FindReplace = jindo.$Class({
   _replace: function (sOriginalWord, Replacement, bCaseMatch, bBackwards, bWholeWord, oSelection) {
     if (!sOriginalWord) return 4;
 
-    oSelection = oSelection || new nhn.HuskyRange(this.window);
+    oSelection = oSelection || new HuskyRange(this.window);
     oSelection.setFromSelection();
 
     bCaseMatch = bCaseMatch || false;
@@ -192,7 +192,7 @@ nhn.FindReplace = jindo.$Class({
       return iResult;
     }
 
-    var oSelection = new nhn.HuskyRange(this.window);
+    var oSelection = new HuskyRange(this.window);
     oSelection.setFromSelection();
 
     // 시작점의 북마크가 지워지면서 시작점을 지나서 replace가 되는 현상 방지용
@@ -213,11 +213,11 @@ nhn.FindReplace = jindo.$Class({
     }
 
     var startingPointReached = function () {
-      var oCurSelection = new nhn.HuskyRange(win);
+      var oCurSelection = new HuskyRange(win);
       oCurSelection.setFromSelection();
 
       oSelection.moveToBookmark(sBookmark);
-      var pos = oSelection.compareBoundaryPoints(nhn.W3CDOMRange.START_TO_END, oCurSelection);
+      var pos = oSelection.compareBoundaryPoints(START_TO_END, oCurSelection);
 
       if (pos == 1) return false;
       return true;
@@ -376,7 +376,7 @@ nhn.FindReplace = jindo.$Class({
           if (sTmp == sOriginalWord) {
             nMatchCnt++;
 
-            var oSelection = new nhn.HuskyRange(this.window);
+            var oSelection = new HuskyRange(this.window);
             // 마지막 글자의 뒷부분 처리
             var elContainer, nOffset;
             if (j + nOriginLen < aElTexts[i].length) {
