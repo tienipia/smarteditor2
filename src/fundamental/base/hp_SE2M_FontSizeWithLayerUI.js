@@ -164,7 +164,7 @@ nhn.husky.SE2M_FontSizeWithLayerUI = jindo.$Class({
 	},
 
 	_getFontSizeFromLI : function(elLi){
-		return elLi.firstChild.firstChild.style.fontSize;
+		return elLi.dataset.fontSize;
 	},
 	
 	_clearFontSizeSelection : function(){
