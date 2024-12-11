@@ -2,6 +2,7 @@ import { SE2M_Toolbar } from './common/base/hp_SE2M_Toolbar';
 import { SE2B_CSSLoader, SE_OuterIFrameControl, SE_ToolbarToggler } from './extra';
 import { HuskyCore } from './husky_framework';
 import { CorePlugin, HuskyRangeManager } from './husky_framework';
+import { SE2M_QuickEditor_Common } from './quick_editor/hp_SE2M_QuickEditor_Common';
 import { Hotkey } from './shortcut/hp_Hotkey';
 import { SE_UndoRedo } from './undo_redo/hp_SE_UndoRedo';
 import {
@@ -114,7 +115,7 @@ export function createSEditor2(elIRField, htParams, elSeAppContainer) {
   }
 
   oEditor.registerPlugin(new MessageManager(oMessageMap, htParams.I18N_LOCALE));
-  oEditor.registerPlugin(new nhn.husky.SE2M_QuickEditor_Common(elAppContainer)); // 퀵에디터 공통(표, 이미지)
+  oEditor.registerPlugin(new SE2M_QuickEditor_Common(elAppContainer)); // 퀵에디터 공통(표, 이미지)
 
   oEditor.registerPlugin(new SE2B_CSSLoader()); // CSS lazy load
   if (window.frameElement) {

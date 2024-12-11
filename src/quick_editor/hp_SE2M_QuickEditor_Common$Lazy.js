@@ -1,11 +1,12 @@
 import { HuskyCore } from '../husky_framework';
+import { SE2M_QuickEditor_Common } from './hp_SE2M_QuickEditor_Common';
 
 HuskyCore.addLoadedFile('hp_SE2M_QuickEditor_Common$Lazy.js');
 /**
  * @depends nhn.husky.SE2M_QuickEditor_Common
  * this.oApp.registerLazyMessage(["OPEN_QE_LAYER"], ["hp_SE2M_QuickEditor_Common$Lazy.js"]);
  */
-HuskyCore.mixin(nhn.husky.SE2M_QuickEditor_Common, {
+HuskyCore.mixin(SE2M_QuickEditor_Common, {
   //@lazyload_js OPEN_QE_LAYER[
   /**
    * openType을 저장하는 함수.

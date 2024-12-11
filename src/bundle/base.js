@@ -26,7 +26,6 @@ import '../fundamental/editing/hp_SE_EditingArea_TEXT.js';
 import '../fundamental/editing/hp_SE_EditingArea_WYSIWYG.js';
 import '../fundamental/editing/hp_SE_PasteHandler.js';
 import '../fundamental/editing/hp_SE_WYSIWYGEnterKey.js';
-import '../quick_editor/hp_SE2M_QuickEditor_Common.js';
 
 const __VERSION__ = '2.0.0';
 const __HASH__ = 'b1e2f4c';

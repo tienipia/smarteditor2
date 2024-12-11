@@ -1,6 +1,6 @@
 import { SE2M_Configuration } from '../config';
 
-nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
+export const SE2M_QuickEditor_Common = jindo.$Class({
   /**
    * class 이름
    * @type {String}
