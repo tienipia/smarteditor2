@@ -1,10 +1,27 @@
-node_modules
-build
-dist
-report
-*.tgz
+/.parcel-cache/
+/node_modules/
+/dist/
+/dist-*/
+/dist-release 
+/dev-dist/
+/*.log
+/release.txt
+/docs/.vitepress/dist/
+/docs/.vitepress/cache/
 
-.idea
-*.iml
-package-lock.json
-yarn.lock
+# yarn ignores
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Vite Plugin *.d.ts
+/auto-imports.d.ts
+/components.d.ts
+/typed-router.d.ts
+
+# Local DotEnv *.local
+*.local
